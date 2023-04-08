@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sample_app2/constants/sizes.dart';
+import '/constants/sizes.dart';
 
 class Gaps {
   // Vertical Gaps

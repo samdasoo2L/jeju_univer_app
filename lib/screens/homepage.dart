@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:sample_app2/bottom_body/bb_map_page.dart';
-import 'package:sample_app2/bottom_widgets/nav_bar.dart';
-import 'package:sample_app2/bottom_body/bb_food_page.dart';
-import 'package:sample_app2/constants/sizes.dart';
-import 'package:sample_app2/bottom_body/bb_main_page.dart';
-import 'package:sample_app2/web_crawling/food_menu.dart';
+import '/bottom_widgets/nav_bar.dart';
+import '/bottom_body/bb_food_page.dart';
+import '/constants/sizes.dart';
+import '/bottom_body/bb_main_page.dart';
+import '/web_crawling/food_menu.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

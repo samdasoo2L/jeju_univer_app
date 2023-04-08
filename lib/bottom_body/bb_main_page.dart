@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sample_app2/constants/gaps.dart';
-import 'package:sample_app2/main_page_widgets/jeju_dust.dart';
-import 'package:sample_app2/main_page_widgets/jeju_food_menu.dart';
-import 'package:sample_app2/main_page_widgets/jeju_uni_bus.dart';
-import 'package:sample_app2/main_page_widgets/jeju_weather.dart';
+import '/constants/gaps.dart';
+import '/main_page_widgets/jeju_dust.dart';
+import '/main_page_widgets/jeju_food_menu.dart';
+import '/main_page_widgets/jeju_uni_bus.dart';
+import '/main_page_widgets/jeju_weather.dart';
 
 class MainPage extends StatelessWidget {
   const MainPage({
