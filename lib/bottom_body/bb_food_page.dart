@@ -14,6 +14,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   List<String> titles = [];
   List<String> result = [];
   List<List> a = [];
+  List<String> t = [];
+  List<String> daylist = [];
 
   @override
   void initState() {
@@ -38,10 +40,20 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       a.add(result[i].split("<br>"));
     }
 
+    var t = html
+        .querySelectorAll('table > tbody > tr > td:nth-child(1)')
+        .map((element) => element.innerHtml.trim())
+        .toList();
+
+    for (int i = 0; i < 18; i += 4) {
+      daylist.add(t[i].split("<br>")[0]);
+    }
+
     setState(() {
       this.titles = titles;
       this.result = result;
       a = a;
+      t = t;
     });
   }
 
@@ -57,18 +69,20 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
         oddData.add(a[i]);
       }
     }
-    //print(evenData);
+    print(evenData);
 
     return Scaffold(
       body: SafeArea(
         child: ListView.separated(
           padding: const EdgeInsets.all(12),
-          itemCount: a.length,
+          itemCount: evenData.length,
           itemBuilder: (context, index) {
             final b = evenData[index];
+            final c = oddData[index];
+            final dl = daylist[index];
             return Row(
               children: [
-                Container(child: const Text('a')),
+                Container(child: Text(dl)),
                 Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade400),
@@ -78,6 +92,19 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       for (int i = 0; i < b.length; i++)
                         Text(
                           b[i],
+                        )
+                    ],
+                  ),
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade400),
+                  ),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < c.length; i++)
+                        Text(
+                          c[i],
                         )
                     ],
                   ),
