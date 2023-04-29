@@ -20,18 +20,20 @@ class _DormitoryMenuState extends State<DormitoryMenu> {
   }
 
   Future getWebsiteData2() async {
-    final url = Uri.parse('https://ibfoodjeju.modoo.at');
+    final url = Uri.parse(
+        'https://ibfoodjeju.modoo.at/?link=70y98aj7&messageNo=52&mode=view');
     final response = await http.get(url);
     dom.Document html = dom.Document.html(response.body);
 
     final urlImages2 = html
-        .querySelectorAll('div.area_info > div > a')
-        .map((element) =>
-            'https://ibfoodjeju.modoo.at/${element.attributes['src']!}')
+        .querySelectorAll('div.photo_img > img ')
+        .map((element) => element.attributes['src']!)
         .toList();
 
-    print(urlImages2.length);
-    print(urlImages2);
+    print('Count: ${urlImages2.length}');
+    for (final image in urlImages2) {
+      debugPrint(image);
+    }
 
     setState(() {
       this.urlImages2 = urlImages2;

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'screens/homepage.dart';
 
 void main() {
@@ -10,8 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: HomePage(),
+    return ScreenUtilInit(
+      builder: (context, child) => const MaterialApp(
+        home: HomePage(),
+      ),
+      designSize: const Size(360, 640),
     );
   }
   // commit확인

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
 
@@ -69,7 +70,6 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
         oddData.add(a[i]);
       }
     }
-    print(evenData);
 
     return Scaffold(
       body: SafeArea(
@@ -77,36 +77,60 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
           padding: const EdgeInsets.all(12),
           itemCount: evenData.length,
           itemBuilder: (context, index) {
-            final b = evenData[index];
-            final c = oddData[index];
+            final lunchMenu = evenData[index];
+            final dinnerMenu = oddData[index];
             final dl = daylist[index];
-            return Row(
+            print(dl);
+            return Column(
               children: [
-                Container(child: Text(dl)),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade400),
-                  ),
-                  child: Column(
-                    children: [
-                      for (int i = 0; i < b.length; i++)
-                        Text(
-                          b[i],
-                        )
-                    ],
-                  ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                //   children: const [
+                //     Text('날짜'),
+                //     Text('점심'),
+                //     Text('저녁'),
+                //   ],
+                // ),
+                // Container(
+                //   decoration: BoxDecoration(
+                //     border: Border.all(color: Colors.black26),
+                //   ),
+                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      child: Text(
+                        dl,
+                        style: TextStyle(fontSize: 20.sp),
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        children: [
+                          for (int i = 0; i < lunchMenu.length - 1; i++)
+                            Text(
+                              lunchMenu[i],
+                              style: TextStyle(fontSize: 14.sp),
+                            )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      child: Column(
+                        children: [
+                          for (int i = 0; i < dinnerMenu.length; i++)
+                            Text(
+                              dinnerMenu[i],
+                            )
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
                 Container(
                   decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade400),
-                  ),
-                  child: Column(
-                    children: [
-                      for (int i = 0; i < c.length; i++)
-                        Text(
-                          c[i],
-                        )
-                    ],
+                    border: Border.all(color: Colors.black),
                   ),
                 ),
               ],
