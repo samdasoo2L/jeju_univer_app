@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../bottom_body/bb_bus_page.dart';
 import '../testtest.dart';
 import '../weather_api/weather_screen.dart';
 import '/food_selected/food_selected.dart';
@@ -29,7 +30,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           Offstage(
             offstage: _selectedIndex != 0,
-            child: const WeatherScreen(),
+            child: const BusPage(),
           ),
           Offstage(
             offstage: _selectedIndex != 1,
@@ -39,10 +40,10 @@ class _HomePageState extends State<HomePage> {
             offstage: _selectedIndex != 2,
             child: const FoodSelected(),
           ),
-          // Offstage(
-          //   offstage: _selectedIndex != 3,
-          //   child: const Loading(),
-          // ),
+          Offstage(
+            offstage: _selectedIndex != 3,
+            child: const WeatherScreen(),
+          ),
         ],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -73,13 +74,13 @@ class _HomePageState extends State<HomePage> {
                 selectedIcon: FontAwesomeIcons.bowlFood,
                 onTap: () => _onTap(2),
               ),
-              // NavTab(
-              //   text: "Map",
-              //   isSelected: _selectedIndex == 3,
-              //   icon: FontAwesomeIcons.compass,
-              //   selectedIcon: FontAwesomeIcons.solidCompass,
-              //   onTap: () => _onTap(3),
-              // ),
+              NavTab(
+                text: "Weather",
+                isSelected: _selectedIndex == 3,
+                icon: FontAwesomeIcons.cloudSun,
+                selectedIcon: FontAwesomeIcons.sunPlantWilt,
+                onTap: () => _onTap(3),
+              ),
             ],
           ),
         ),

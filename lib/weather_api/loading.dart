@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-
 import 'data/network.dart';
 import 'model/model.dart';
-
-const apiKey = 'c663574adf4b2a0bb08b4f39cc021292';
 
 class WeatherData {
   Model model = Model();
@@ -15,6 +12,7 @@ class WeatherData {
   Widget? quality;
   String? air;
   String? air2;
+  String? kor;
   var date = DateTime.now();
 
   Future<List<dynamic>> getLocation1() async {
@@ -34,8 +32,31 @@ class WeatherData {
     icon = model.getWeatherIcon(condition);
     pollution = model.getAirIcon(grade);
     quality = model.airIndex(index);
-    air = airData['list'][0]['components']['pm2_5'].toInt().toString();
-    air2 = airData['list'][0]['components']['pm10'].toInt().toString();
+    air = airData['list'][0]['components']['pm2_5'].toString();
+    air2 = airData['list'][0]['components']['pm10'].toString();
+
+    String? weatherKorean() {
+      if (des == 'clear sky') {
+        return "맑은 하늘";
+      } else if (des == 'few clouds') {
+        return "흩어진 구름";
+      } else if (des == 'broken cloud') {
+        return "부서진 구름";
+      } else if (des == 'shower rain') {
+        return "소나기";
+      } else if (des == 'rain') {
+        return "비";
+      } else if (des == 'thunderstorm') {
+        return "뇌우";
+      } else if (des == 'snow') {
+        return "눈";
+      } else if (des == 'mist') {
+        return "안개";
+      }
+      return null;
+    }
+
+    kor = weatherKorean();
 
     return [
       temp,
@@ -43,7 +64,7 @@ class WeatherData {
       condition,
       grade,
       index,
-      des,
+      kor,
       icon,
       pollution,
       quality,
@@ -53,11 +74,12 @@ class WeatherData {
   }
 }
 
-//  void updateData() {
 
+
+
+//  void updateData() {
   //   var weatherData = preWeatherData[0];
   //   var airData = preWeatherData[1];
-
   //   double temp2 = weatherData['main']['temp'].toDouble();
   //   temp = temp2.toInt();
   //   cityName = weatherData['name'];

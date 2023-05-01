@@ -11,11 +11,10 @@ class FoodDetailPage extends StatefulWidget {
 }
 
 class _FoodDetailPageState extends State<FoodDetailPage> {
-  var tab = 0;
   List<String> titles = [];
   List<String> result = [];
-  List<List> a = [];
-  List<String> t = [];
+  List<List> collegeFoodMenu = [];
+  List<String> daytime = [];
   List<String> daylist = [];
 
   @override
@@ -37,24 +36,25 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     List<String> result = titles.toList();
     result.removeWhere((item) => item.startsWith('없음'));
 
-    for (int i = 0; i < 10; i++) {
-      a.add(result[i].split("<br>"));
+    for (int i = 0; i < result.length; i++) {
+      collegeFoodMenu.add(result[i].split("<br>"));
     }
+    //result.length <- 10 으로 일단 변경하고 앱 테스트
 
-    var t = html
+    var daytime = html
         .querySelectorAll('table > tbody > tr > td:nth-child(1)')
         .map((element) => element.innerHtml.trim())
         .toList();
 
     for (int i = 0; i < 18; i += 4) {
-      daylist.add(t[i].split("<br>")[0]);
+      daylist.add(daytime[i].split("<br>")[0]);
     }
 
     setState(() {
       this.titles = titles;
       this.result = result;
-      a = a;
-      t = t;
+      collegeFoodMenu = collegeFoodMenu;
+      daytime = daytime;
     });
   }
 
@@ -63,11 +63,11 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
     List<List> evenData = [];
     List<List> oddData = [];
 
-    for (int i = 0; i < a.length; i++) {
+    for (int i = 0; i < collegeFoodMenu.length; i++) {
       if (i % 2 == 0) {
-        evenData.add(a[i]);
+        evenData.add(collegeFoodMenu[i]);
       } else {
-        oddData.add(a[i]);
+        oddData.add(collegeFoodMenu[i]);
       }
     }
 
@@ -75,56 +75,36 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
       body: SafeArea(
         child: ListView.separated(
           padding: const EdgeInsets.all(12),
-          itemCount: evenData.length,
+          itemCount: daylist.length,
           itemBuilder: (context, index) {
             final lunchMenu = evenData[index];
-            final dinnerMenu = oddData[index];
-            final dl = daylist[index];
-            print(dl);
+            //final dinnerMenu = oddData[index];
+            final days = daylist[index];
             return Column(
               children: [
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                //   children: const [
-                //     Text('날짜'),
-                //     Text('점심'),
-                //     Text('저녁'),
-                //   ],
-                // ),
-                // Container(
-                //   decoration: BoxDecoration(
-                //     border: Border.all(color: Colors.black26),
-                //   ),
-                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                      child: Text(
-                        dl,
-                        style: TextStyle(fontSize: 20.sp),
-                      ),
+                    Text(
+                      days,
+                      style: TextStyle(fontSize: 20.sp),
                     ),
-                    Container(
-                      child: Column(
-                        children: [
-                          for (int i = 0; i < lunchMenu.length - 1; i++)
-                            Text(
-                              lunchMenu[i],
-                              style: TextStyle(fontSize: 14.sp),
-                            )
-                        ],
-                      ),
+                    Column(
+                      children: [
+                        for (int i = 0; i < lunchMenu.length - 1; i++)
+                          Text(
+                            lunchMenu[i],
+                            style: TextStyle(fontSize: 14.sp),
+                          )
+                      ],
                     ),
-                    Container(
-                      child: Column(
-                        children: [
-                          for (int i = 0; i < dinnerMenu.length; i++)
-                            Text(
-                              dinnerMenu[i],
-                            )
-                        ],
-                      ),
+                    Column(
+                      children: const [
+                        // for (int i = 0; i < dinnerMenu.length; i++)
+                        //   Text(
+                        //     dinnerMenu[i],
+                        //   )
+                      ],
                     ),
                   ],
                 ),

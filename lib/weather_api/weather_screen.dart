@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import '../fivedays_weather.dart';
 import 'loading.dart';
 
 class WeatherScreen extends StatefulWidget {
@@ -11,6 +14,7 @@ class WeatherScreen extends StatefulWidget {
 
 class _WeatherScreenState extends State<WeatherScreen> {
   List<dynamic> preWeatherData = [];
+  List<dynamic> fiveWeatherData = [];
   String duration = "";
 
   var date = DateTime.now();
@@ -19,6 +23,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   void initState() {
     super.initState();
     getUserOrder();
+    getFiveWeather();
   }
 
   Future<void> getUserOrder() async {
@@ -26,32 +31,10 @@ class _WeatherScreenState extends State<WeatherScreen> {
     setState(() {});
   }
 
-  // List<String> format1(List<dynamic> infoData) {
-  //   var temp = infoData[0].toString();
-  //   var cityName = infoData[1].toString();
-  //   var condition = infoData[2].toString();
-  //   var grade = infoData[3].toString();
-  //   var index = infoData[4].toString();
-  //   var des = infoData[5].toString();
-  //   var icon = infoData[6].toString();
-  //   var pollution = infoData[7].toString();
-  //   var quality = infoData[8].toString();
-  //   var air = infoData[9].toString();
-  //   var air2 = infoData[10].toString();
-  //   return [
-  //     temp,
-  //     cityName,
-  //     condition,
-  //     grade,
-  //     index,
-  //     des,
-  //     icon,
-  //     pollution,
-  //     quality,
-  //     air,
-  //     air2
-  //   ];
-  // }
+  Future<void> getFiveWeather() async {
+    fiveWeatherData = await FiveWeatherData().getFiveWeatherData();
+    setState(() {});
+  }
 
   String getSystemTime() {
     var now = DateTime.now();
@@ -61,237 +44,269 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-        centerTitle: true,
-        // leading: IconButton(
-        //   icon: const Icon(
-        //     Icons.near_me,
-        //     size: 30.0,
-        //     color: Colors.white,
-        //   ),
-        //   onPressed: () {},
-        // ),
-        // actions: [
-        //   IconButton(
-        //     icon: const Icon(
-        //       Icons.location_searching,
-        //       size: 30.0,
-        //       color: Colors.white,
-        //     ),
-        //     onPressed: () {},s
-        //   )
-        // ],
+      body: Container(
+        child: Stack(
+          children: [
+            Image.asset(
+              'assets/images/base.png',
+              fit: BoxFit.cover,
+              height: double.infinity,
+              width: double.infinity,
+            ),
+            Container(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Column(
+                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          children: [
+                            SizedBox(
+                              height: 50.0.h,
+                            ),
+                            Row(
+                              children: [
+                                SizedBox(
+                                  width: 30.w,
+                                ),
+                                Text(
+                                  // '$cityName',
+                                  '날씨',
+                                  style: GoogleFonts.lato(
+                                      fontSize: 40.0.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            // Row(
+                            //   children: [
+                            //     TimerBuilder.periodic(
+                            //         const Duration(minutes: 1),
+                            //         builder: (context) {
+                            //       //print(getSystemTime());
+                            //       return Text(
+                            //         getSystemTime(),
+                            //         style: GoogleFonts.lato(
+                            //             fontSize: 16.0.sp,
+                            //             fontWeight: FontWeight.bold,
+                            //             color: const Color.fromRGBO(
+                            //                 255, 178, 79, 1)),
+                            //       );
+                            //     }),
+                            //     Text(
+                            //       DateFormat('- EEEE,').format(date),
+                            //       textAlign: TextAlign.left,
+                            //       style: GoogleFonts.lato(
+                            //           fontSize: 16.0,
+                            //           fontWeight: FontWeight.bold,
+                            //           color: const Color.fromRGBO(
+                            //               255, 178, 79, 1)),
+                            //     ),
+                            //     Text(
+                            //       DateFormat('d MMM, yyyy').format(date),
+                            //       textAlign: TextAlign.left,
+                            //       style: GoogleFonts.lato(
+                            //           fontSize: 16.0.sp,
+                            //           fontWeight: FontWeight.bold,
+                            //           color: const Color.fromRGBO(
+                            //               255, 178, 79, 1)),
+                            //     ),
+                            //   ],
+                            // ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 100.h,
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 40.w,
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  "현재 제주대 날씨",
+                                  style: TextStyle(
+                                      color:
+                                          const Color.fromRGBO(255, 178, 79, 1),
+                                      fontSize: 20.sp),
+                                ),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      preWeatherData.isEmpty
+                                          ? "로딩중입니다"
+                                          : preWeatherData[0],
+                                      style: TextStyle(
+                                          color: const Color.fromRGBO(
+                                              255, 178, 79, 1),
+                                          fontSize: 50.sp),
+                                    ), //온도text
+                                    Text(
+                                      '\u2103',
+                                      style: TextStyle(
+                                          color: const Color.fromRGBO(
+                                              255, 178, 79, 1),
+                                          fontSize: 50.sp),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                Row(
+                                  children: [
+                                    //icon ??= const Text('새로고침을 해주세요'),
+                                    //preWeatherData[6],
+                                    Text(
+                                      preWeatherData.isEmpty
+                                          ? "로딩중입니다"
+                                          : preWeatherData[5],
+                                      style: TextStyle(
+                                          color: const Color.fromRGBO(
+                                              255, 178, 79, 1),
+                                          fontSize: 30.sp),
+                                    ), //날씨예보
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                Column(
+                                  children: [
+                                    Text(
+                                      '대기질 지수',
+                                      style: GoogleFonts.lato(
+                                          fontSize: 20.0.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color.fromRGBO(
+                                              255, 178, 79, 1)),
+                                    ),
+                                    //pollution ??= const Text('null'),
+                                    //preWeatherData[8],
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                  // Column(
+                  //   children: [
+                  //     Container(
+                  //       margin: EdgeInsets.symmetric(vertical: 20.0.h),
+                  //       decoration: BoxDecoration(
+                  //           border: Border.all(
+                  //               color: const Color.fromRGBO(255, 178, 79, 1))),
+                  //     ),
+                  //     Row(
+                  //       children: [
+                  //         Column(
+                  //           children: [
+                  //             Text(
+                  //               'AQI(대기질 지수)',
+                  //               style: GoogleFonts.lato(
+                  //                   fontSize: 14.0.sp,
+                  //                   fontWeight: FontWeight.bold,
+                  //                   color:
+                  //                       const Color.fromRGBO(255, 178, 79, 1)),
+                  //             ),
+                  //             //pollution ??= const Text('null'),
+                  //             //preWeatherData[8],
+                  //           ],
+                  //         ),
+                  //         SizedBox(width: 45.w),
+                  //         Column(
+                  //           children: [
+                  //             Text(
+                  //               '미세먼지',
+                  //               style: GoogleFonts.lato(
+                  //                   fontSize: 14.0.sp,
+                  //                   fontWeight: FontWeight.bold,
+                  //                   color:
+                  //                       const Color.fromRGBO(255, 178, 79, 1)),
+                  //             ),
+                  //             const SizedBox(
+                  //               height: 10.0,
+                  //             ),
+                  //             Text(
+                  //               preWeatherData.isEmpty
+                  //                   ? "로딩중입니다"
+                  //                   : preWeatherData[10],
+                  //               style: GoogleFonts.lato(
+                  //                   fontSize: 14.0.sp,
+                  //                   fontWeight: FontWeight.bold,
+                  //                   color:
+                  //                       const Color.fromRGBO(255, 178, 79, 1)),
+                  //             ),
+                  //             Text(
+                  //               '㎍/m3',
+                  //               style: GoogleFonts.lato(
+                  //                   fontSize: 14.0.sp,
+                  //                   fontWeight: FontWeight.bold,
+                  //                   color:
+                  //                       const Color.fromRGBO(255, 178, 79, 1)),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //         SizedBox(width: 50.w),
+                  //         Column(
+                  //           children: [
+                  //             Text(
+                  //               '초미세먼지',
+                  //               style: GoogleFonts.lato(
+                  //                   fontSize: 14.0.sp,
+                  //                   fontWeight: FontWeight.bold,
+                  //                   color:
+                  //                       const Color.fromRGBO(255, 178, 79, 1)),
+                  //             ),
+                  //             SizedBox(
+                  //               height: 10.h,
+                  //             ),
+                  //             Text(
+                  //               preWeatherData.isEmpty
+                  //                   ? "로딩중입니다"
+                  //                   : preWeatherData[9],
+                  //               style: GoogleFonts.lato(
+                  //                   fontSize: 14.0.sp,
+                  //                   fontWeight: FontWeight.bold,
+                  //                   color:
+                  //                       const Color.fromRGBO(255, 178, 79, 1)),
+                  //             ),
+                  //             Text(
+                  //               '㎍/m3',
+                  //               style: GoogleFonts.lato(
+                  //                   fontSize: 14.0.sp,
+                  //                   fontWeight: FontWeight.bold,
+                  //                   color:
+                  //                       const Color.fromRGBO(255, 178, 79, 1)),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ],
+                  //     )
+                  //   ],
+                  // )
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            preWeatherData.isEmpty ? "로딩중입니다" : preWeatherData[1],
-            style: const TextStyle(color: Colors.black),
-          ),
-          //preWeatherData[6] ??= const Text('새로고침을 해주세요'),
-        ],
-      ),
-      //   body: Container(
-      //       child: Stack(
-      //     children: [
-      //       Container(
-      //         decoration: const BoxDecoration(
-      //           color: Colors.white,
-      //         ),
-      //         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
-      //         child: Column(
-      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //           crossAxisAlignment: CrossAxisAlignment.start,
-      //           children: [
-      //             Expanded(
-      //               child: Column(
-      //                 //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //                 crossAxisAlignment: CrossAxisAlignment.start,
-      //                 children: [
-      //                   Column(
-      //                     crossAxisAlignment: CrossAxisAlignment.start,
-      //                     children: [
-      //                       SizedBox(
-      //                         height: 50.0.h,
-      //                       ),
-      //                       Text(
-      //                         // '$cityName',
-      //                         '제주대 날씨',
-      //                         style: GoogleFonts.lato(
-      //                             fontSize: 35.0.sp,
-      //                             fontWeight: FontWeight.bold,
-      //                             color: const Color.fromRGBO(152, 243, 7, 50)),
-      //                       ),
-      //                       const SizedBox(
-      //                         height: 10,
-      //                       ),
-      //                       Row(
-      //                         children: [
-      //                           TimerBuilder.periodic(const Duration(minutes: 1),
-      //                               builder: (context) {
-      //                             //print(getSystemTime());
-      //                             return Text(
-      //                               getSystemTime(),
-      //                               style: GoogleFonts.lato(
-      //                                   fontSize: 16.0.sp,
-      //                                   fontWeight: FontWeight.bold,
-      //                                   color: const Color.fromRGBO(
-      //                                       152, 243, 7, 50)),
-      //                             );
-      //                           }),
-      //                           Text(
-      //                             DateFormat('- EEEE,').format(date),
-      //                             textAlign: TextAlign.left,
-      //                             style: GoogleFonts.lato(
-      //                                 fontSize: 16.0,
-      //                                 fontWeight: FontWeight.bold,
-      //                                 color:
-      //                                     const Color.fromRGBO(152, 243, 7, 50)),
-      //                           ),
-      //                           Text(
-      //                             DateFormat('d MMM, yyyy').format(date),
-      //                             textAlign: TextAlign.left,
-      //                             style: GoogleFonts.lato(
-      //                                 fontSize: 16.0.sp,
-      //                                 fontWeight: FontWeight.bold,
-      //                                 color:
-      //                                     const Color.fromRGBO(152, 243, 7, 50)),
-      //                           ),
-      //                         ],
-      //                       ),
-      //                     ],
-      //                   ),
-      //                   SizedBox(
-      //                     height: 90.h,
-      //                   ),
-      //                   Column(
-      //                     crossAxisAlignment: CrossAxisAlignment.start,
-      //                     children: [
-      //                       Text(
-      //                         '$temp\u2103',
-      //                         style: GoogleFonts.lato(
-      //                             fontSize: 85.0.sp,
-      //                             fontWeight: FontWeight.w300,
-      //                             color: const Color.fromRGBO(152, 243, 7, 50)),
-      //                       ),
-      //                       Row(
-      //                         children: [
-      //                           // SvgPicture.asset(
-      //                           //     'assets/svg/climaconCloudLightning.svg'),
-      //                           icon ??= const Text('새로고침을 해주세요'),
-      //                           SizedBox(
-      //                             width: 10.w,
-      //                           ),
-      //                           Text(
-      //                             '$des',
-      //                             style: GoogleFonts.lato(
-      //                                 fontSize: 15.0.sp,
-      //                                 //fontWeight: FontWeight.bold,
-      //                                 color:
-      //                                     const Color.fromRGBO(152, 243, 7, 50)),
-      //                           ),
-      //                         ],
-      //                       ),
-      //                     ],
-      //                   )
-      //                 ],
-      //               ),
-      //             ),
-      //             Column(
-      //               children: [
-      //                 Container(
-      //                   margin: EdgeInsets.symmetric(vertical: 20.0.h),
-      //                   decoration: BoxDecoration(
-      //                       border: Border.all(color: Colors.white30)),
-      //                 ),
-      //                 Row(
-      //                   children: [
-      //                     Column(
-      //                       children: [
-      //                         Text(
-      //                           'AQI(대기질 지수)',
-      //                           style: GoogleFonts.lato(
-      //                               fontSize: 14.0.sp,
-      //                               fontWeight: FontWeight.bold,
-      //                               color: Colors.white),
-      //                         ),
-      //                         pollution ??= const Text('null'),
-      //                         quality ??= const Text('새로고침을 해주세요'),
-      //                       ],
-      //                     ),
-      //                     SizedBox(width: 45.w),
-      //                     Column(
-      //                       children: [
-      //                         Text(
-      //                           '미세먼지',
-      //                           style: GoogleFonts.lato(
-      //                               fontSize: 14.0.sp,
-      //                               fontWeight: FontWeight.bold,
-      //                               color: Colors.white),
-      //                         ),
-      //                         const SizedBox(
-      //                           height: 10.0,
-      //                         ),
-      //                         Text(
-      //                           '$air2',
-      //                           style: GoogleFonts.lato(
-      //                               fontSize: 24.0.sp,
-      //                               fontWeight: FontWeight.bold,
-      //                               color: Colors.white),
-      //                         ),
-      //                         Text(
-      //                           '㎍/m3',
-      //                           style: GoogleFonts.lato(
-      //                               fontSize: 14.0.sp,
-      //                               fontWeight: FontWeight.bold,
-      //                               color: Colors.white),
-      //                         ),
-      //                       ],
-      //                     ),
-      //                     SizedBox(width: 50.w),
-      //                     Column(
-      //                       children: [
-      //                         Text(
-      //                           '초미세먼지',
-      //                           style: GoogleFonts.lato(
-      //                               fontSize: 14.0.sp,
-      //                               fontWeight: FontWeight.bold,
-      //                               color: Colors.white),
-      //                         ),
-      //                         SizedBox(
-      //                           height: 10.h,
-      //                         ),
-      //                         Text(
-      //                           '$air',
-      //                           style: GoogleFonts.lato(
-      //                               fontSize: 24.0.sp,
-      //                               fontWeight: FontWeight.bold,
-      //                               color: Colors.white),
-      //                         ),
-      //                         Text(
-      //                           '㎍/m3',
-      //                           style: GoogleFonts.lato(
-      //                               fontSize: 14.0.sp,
-      //                               fontWeight: FontWeight.bold,
-      //                               color: Colors.white),
-      //                         ),
-      //                       ],
-      //                     ),
-      //                   ],
-      //                 )
-      //               ],
-      //             )
-      //           ],
-      //         ),
-      //       ),
-      //     ],
-      //   )),
-      // );
     );
   }
 }
