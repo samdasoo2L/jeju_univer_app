@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-class Periodic extends StatefulWidget {
-  const Periodic({super.key});
+class BusPage extends StatefulWidget {
+  const BusPage({super.key});
   @override
-  State<Periodic> createState() => _PeriodicState();
+  State<BusPage> createState() => _PeriodicState();
 }
 
-class _PeriodicState extends State<Periodic> {
+class _PeriodicState extends State<BusPage> {
   DateTime nowTime = DateTime.now();
   void onTimer(Timer timer) {
     setState(() {

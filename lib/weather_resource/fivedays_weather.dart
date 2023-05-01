@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'weather_api/data/network.dart';
-import 'weather_api/model/model.dart';
+import 'data/network.dart';
+import 'model/model.dart';
 
 class FiveWeatherData {
   Model model = Model();

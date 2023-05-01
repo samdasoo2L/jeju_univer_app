@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../bottom_body/bb_bus_page.dart';
-import '../testtest.dart';
-import '../weather_api/weather_screen.dart';
-import '/food_selected/food_selected.dart';
-import '/bottom_widgets/nav_bar.dart';
+import 'main_page.dart';
+import 'bus_page.dart';
+import 'weather_screen.dart';
+import 'food_page.dart';
+import '../bottom_bar/nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,19 +30,19 @@ class _HomePageState extends State<HomePage> {
         children: [
           Offstage(
             offstage: _selectedIndex != 0,
-            child: const BusPage(),
+            child: const MainPage(),
           ),
           Offstage(
             offstage: _selectedIndex != 1,
-            child: const Periodic(),
+            child: const BusPage(),
           ),
           Offstage(
             offstage: _selectedIndex != 2,
-            child: const FoodSelected(),
+            child: const FoodPage(),
           ),
           Offstage(
             offstage: _selectedIndex != 3,
-            child: const WeatherScreen(),
+            child: const WeatherPage(),
           ),
         ],
       ),

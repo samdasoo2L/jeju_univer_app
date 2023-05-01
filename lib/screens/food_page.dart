@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'college_food.dart';
-import 'professor_food.dart';
+import '../food_resource/college_food.dart';
+import '../food_resource/professor_food.dart';
 
-class FoodSelected extends StatelessWidget {
-  const FoodSelected({super.key});
+class FoodPage extends StatelessWidget {
+  const FoodPage({super.key});
 
   Future<void> _launchURL(String url) async {
     // final Uri uri = Uri(scheme: "https", host: url);
@@ -38,8 +38,8 @@ class FoodSelected extends StatelessWidget {
                   SizedBox(
                     height: 50.h,
                   ),
-                  Row(
-                    children: const [
+                  const Row(
+                    children: [
                       SizedBox(
                         width: 35,
                       ),
