@@ -50,7 +50,7 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
     for (int i = 0; i < result.length; i++) {
       collegeFoodMenu.add(result[i].split("<br>"));
     }
-    //String aaaa = collegeFoodMenu[2];
+    String aaaa = collegeFoodMenu[2].toString();
     print(Text(aaaa));
     //result.length <- 10 으로 일단 변경하고 앱 테스트
 
@@ -69,6 +69,7 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
         result = result;
         collegeFoodMenu = collegeFoodMenu;
         daytime = daytime;
+        aaaa = aaaa;
       },
     );
   }
