@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
+
 import 'data/network.dart';
 import 'model/model.dart';
 
 class WeatherData {
   Model model = Model();
-  String? cityName;
   String? temp;
   String? des;
-  Widget? icon;
-  Widget? pollution;
-  Widget? quality;
-  String? air;
-  String? air2;
-  String? kor;
-  var date = DateTime.now();
+  String? weatherNameKor;
+  String? pollutionkor;
+  String? weatherIcon;
+  Widget? weatherIconPng;
 
   Future<List<dynamic>> getLocation1() async {
     Network network = Network(
@@ -24,16 +21,14 @@ class WeatherData {
     var airData = await network.getAirData();
 
     temp = weatherData['main']['temp'].toDouble().toInt().toString();
-    cityName = weatherData['name'].toString();
     var condition = weatherData['weather'][0]['id'];
     var grade = airData['list'][0]['main']['aqi'];
     var index = airData['list'][0]['main']['aqi'];
     des = weatherData['weather'][0]['description'].toString();
-    icon = model.getWeatherIcon(condition);
-    pollution = model.getAirIcon(grade);
-    quality = model.airIndex(index);
-    air = airData['list'][0]['components']['pm2_5'].toString();
-    air2 = airData['list'][0]['components']['pm10'].toString();
+    weatherIcon = weatherData['weather'][0]['icon'].toString();
+    weatherIconPng = Image.network(
+      'https://openweathermap.org/img/wn/$weatherIcon@2x.png',
+    );
 
     String? weatherKorean() {
       if (des == 'clear sky') {
@@ -53,43 +48,34 @@ class WeatherData {
       } else if (des == 'mist') {
         return "안개";
       }
+      return des;
+    }
+
+    weatherNameKor = weatherKorean();
+
+    String? pollutionKorean() {
+      if (index == 1) {
+        return "매우 좋음";
+      } else if (index == 2) {
+        return "좋음";
+      } else if (index == 3) {
+        return "보통";
+      } else if (index == 4) {
+        return "나쁨";
+      } else if (index == 5) {
+        return "매우나쁨";
+      }
       return null;
     }
 
-    kor = weatherKorean();
+    pollutionkor = pollutionKorean();
 
     return [
       temp,
-      cityName,
-      condition,
-      grade,
-      index,
-      kor,
-      icon,
-      pollution,
-      quality,
-      air,
-      air2
+      weatherNameKor,
+      pollutionkor,
+      weatherIcon,
+      weatherIconPng,
     ];
   }
 }
-
-
-
-
-//  void updateData() {
-  //   var weatherData = preWeatherData[0];
-  //   var airData = preWeatherData[1];
-  //   double temp2 = weatherData['main']['temp'].toDouble();
-  //   temp = temp2.toInt();
-  //   cityName = weatherData['name'];
-  //   var condition = weatherData['weather'][0]['id'];
-  //   var grade = airData['list'][0]['main']['aqi'];
-  //   var index = airData['list'][0]['main']['aqi'];
-  //   des = weatherData['weather'][0]['description'];
-  //   icon = model.getWeatherIcon(condition);
-  //   pollution = model.getAirIcon(grade);
-  //   quality = model.airIndex(index);
-  //   air = airData['list'][0]['components']['pm2_5'];
-  //   air2 = airData['list'][0]['components']['pm10'];
-  // }

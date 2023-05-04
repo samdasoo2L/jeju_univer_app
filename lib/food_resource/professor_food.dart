@@ -21,7 +21,7 @@ class CustomDialog extends StatelessWidget {
           Container(
             width: 400.w,
             height: 500.h,
-            margin: const EdgeInsets.only(top: 13.0, right: 8.0),
+            margin: const EdgeInsets.only(top: 0, right: 0),
             decoration: BoxDecoration(
                 color: Colors.white,
                 shape: BoxShape.rectangle,

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:intl/intl.dart';
 import '../weather_resource/fivedays_weather.dart';
 import '../weather_resource/weather_api.dart';
 
@@ -15,9 +14,6 @@ class WeatherPage extends StatefulWidget {
 class _WeatherScreenState extends State<WeatherPage> {
   List<dynamic> preWeatherData = [];
   List<dynamic> fiveWeatherData = [];
-  String duration = "";
-
-  var date = DateTime.now();
 
   @override
   void initState() {
@@ -36,11 +32,6 @@ class _WeatherScreenState extends State<WeatherPage> {
     setState(() {});
   }
 
-  String getSystemTime() {
-    var now = DateTime.now();
-    return DateFormat("h:mm a").format(now);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,259 +44,203 @@ class _WeatherScreenState extends State<WeatherPage> {
               height: double.infinity,
               width: double.infinity,
             ),
-            Container(
+            WeatherContaninerColumn(),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container WeatherContaninerColumn() {
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 50.h,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 30.w,
+              ),
+              Text(
+                '날씨',
+                style: GoogleFonts.lato(
+                    fontSize: 40.0.sp,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 465.h,
+            width: 400.w,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: Column(
-                      //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          children: [
-                            SizedBox(
-                              height: 50.0.h,
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                  width: 30.w,
-                                ),
-                                Text(
-                                  // '$cityName',
-                                  '날씨',
-                                  style: GoogleFonts.lato(
-                                      fontSize: 40.0.sp,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            // Row(
-                            //   children: [
-                            //     TimerBuilder.periodic(
-                            //         const Duration(minutes: 1),
-                            //         builder: (context) {
-                            //       //print(getSystemTime());
-                            //       return Text(
-                            //         getSystemTime(),
-                            //         style: GoogleFonts.lato(
-                            //             fontSize: 16.0.sp,
-                            //             fontWeight: FontWeight.bold,
-                            //             color: const Color.fromRGBO(
-                            //                 255, 178, 79, 1)),
-                            //       );
-                            //     }),
-                            //     Text(
-                            //       DateFormat('- EEEE,').format(date),
-                            //       textAlign: TextAlign.left,
-                            //       style: GoogleFonts.lato(
-                            //           fontSize: 16.0,
-                            //           fontWeight: FontWeight.bold,
-                            //           color: const Color.fromRGBO(
-                            //               255, 178, 79, 1)),
-                            //     ),
-                            //     Text(
-                            //       DateFormat('d MMM, yyyy').format(date),
-                            //       textAlign: TextAlign.left,
-                            //       style: GoogleFonts.lato(
-                            //           fontSize: 16.0.sp,
-                            //           fontWeight: FontWeight.bold,
-                            //           color: const Color.fromRGBO(
-                            //               255, 178, 79, 1)),
-                            //     ),
-                            //   ],
-                            // ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 100.h,
-                        ),
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 40.w,
-                            ),
-                            Column(
-                              children: [
-                                Text(
-                                  "현재 제주대 날씨",
-                                  style: TextStyle(
-                                      color:
-                                          const Color.fromRGBO(255, 178, 79, 1),
-                                      fontSize: 20.sp),
-                                ),
-                                SizedBox(
-                                  height: 5.h,
-                                ),
-                                Row(
-                                  children: [
-                                    Text(
-                                      preWeatherData.isEmpty
-                                          ? "로딩중입니다"
-                                          : preWeatherData[0],
-                                      style: TextStyle(
-                                          color: const Color.fromRGBO(
-                                              255, 178, 79, 1),
-                                          fontSize: 50.sp),
-                                    ), //온도text
-                                    Text(
-                                      '\u2103',
-                                      style: TextStyle(
-                                          color: const Color.fromRGBO(
-                                              255, 178, 79, 1),
-                                          fontSize: 50.sp),
-                                    ),
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5.h,
-                                ),
-                                Row(
-                                  children: [
-                                    //icon ??= const Text('새로고침을 해주세요'),
-                                    //preWeatherData[6],
-                                    Text(
-                                      preWeatherData.isEmpty
-                                          ? "로딩중입니다"
-                                          : preWeatherData[5],
-                                      style: TextStyle(
-                                          color: const Color.fromRGBO(
-                                              255, 178, 79, 1),
-                                          fontSize: 30.sp),
-                                    ), //날씨예보
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 5.h,
-                                ),
-                                Column(
-                                  children: [
-                                    Text(
-                                      '대기질 지수',
-                                      style: GoogleFonts.lato(
-                                          fontSize: 20.0.sp,
-                                          fontWeight: FontWeight.bold,
-                                          color: const Color.fromRGBO(
-                                              255, 178, 79, 1)),
-                                    ),
-                                    //pollution ??= const Text('null'),
-                                    //preWeatherData[8],
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
+                  NowWeather(),
+                  SizedBox(
+                    height: 20.h,
                   ),
-                  // Column(
-                  //   children: [
-                  //     Container(
-                  //       margin: EdgeInsets.symmetric(vertical: 20.0.h),
-                  //       decoration: BoxDecoration(
-                  //           border: Border.all(
-                  //               color: const Color.fromRGBO(255, 178, 79, 1))),
-                  //     ),
-                  //     Row(
-                  //       children: [
-                  //         Column(
-                  //           children: [
-                  //             Text(
-                  //               'AQI(대기질 지수)',
-                  //               style: GoogleFonts.lato(
-                  //                   fontSize: 14.0.sp,
-                  //                   fontWeight: FontWeight.bold,
-                  //                   color:
-                  //                       const Color.fromRGBO(255, 178, 79, 1)),
-                  //             ),
-                  //             //pollution ??= const Text('null'),
-                  //             //preWeatherData[8],
-                  //           ],
-                  //         ),
-                  //         SizedBox(width: 45.w),
-                  //         Column(
-                  //           children: [
-                  //             Text(
-                  //               '미세먼지',
-                  //               style: GoogleFonts.lato(
-                  //                   fontSize: 14.0.sp,
-                  //                   fontWeight: FontWeight.bold,
-                  //                   color:
-                  //                       const Color.fromRGBO(255, 178, 79, 1)),
-                  //             ),
-                  //             const SizedBox(
-                  //               height: 10.0,
-                  //             ),
-                  //             Text(
-                  //               preWeatherData.isEmpty
-                  //                   ? "로딩중입니다"
-                  //                   : preWeatherData[10],
-                  //               style: GoogleFonts.lato(
-                  //                   fontSize: 14.0.sp,
-                  //                   fontWeight: FontWeight.bold,
-                  //                   color:
-                  //                       const Color.fromRGBO(255, 178, 79, 1)),
-                  //             ),
-                  //             Text(
-                  //               '㎍/m3',
-                  //               style: GoogleFonts.lato(
-                  //                   fontSize: 14.0.sp,
-                  //                   fontWeight: FontWeight.bold,
-                  //                   color:
-                  //                       const Color.fromRGBO(255, 178, 79, 1)),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //         SizedBox(width: 50.w),
-                  //         Column(
-                  //           children: [
-                  //             Text(
-                  //               '초미세먼지',
-                  //               style: GoogleFonts.lato(
-                  //                   fontSize: 14.0.sp,
-                  //                   fontWeight: FontWeight.bold,
-                  //                   color:
-                  //                       const Color.fromRGBO(255, 178, 79, 1)),
-                  //             ),
-                  //             SizedBox(
-                  //               height: 10.h,
-                  //             ),
-                  //             Text(
-                  //               preWeatherData.isEmpty
-                  //                   ? "로딩중입니다"
-                  //                   : preWeatherData[9],
-                  //               style: GoogleFonts.lato(
-                  //                   fontSize: 14.0.sp,
-                  //                   fontWeight: FontWeight.bold,
-                  //                   color:
-                  //                       const Color.fromRGBO(255, 178, 79, 1)),
-                  //             ),
-                  //             Text(
-                  //               '㎍/m3',
-                  //               style: GoogleFonts.lato(
-                  //                   fontSize: 14.0.sp,
-                  //                   fontWeight: FontWeight.bold,
-                  //                   color:
-                  //                       const Color.fromRGBO(255, 178, 79, 1)),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ],
-                  //     )
-                  //   ],
-                  // )
+                  HourlyWeather(),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  WeekWeather(),
                 ],
               ),
             ),
-          ],
-        ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Container WeekWeather() {
+    return Container(
+      width: 330.w,
+      height: 300.h,
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black26),
+          borderRadius: BorderRadius.circular(10)),
+    );
+  }
+
+  Container HourlyWeather() {
+    return Container(
+      width: 330.w,
+      height: 100.h,
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black26),
+          borderRadius: BorderRadius.circular(10)),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: 100.w,
+              height: 90.h,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black12),
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: 3.h,
+                  ),
+                  const Text("오늘 시간대"),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  Container NowWeather() {
+    return Container(
+      child: Column(
+        children: [
+          SizedBox(
+            height: 80.h,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 40.w,
+              ),
+              Column(
+                children: [
+                  Text(
+                    "현재 제주대 날씨",
+                    style: GoogleFonts.lato(
+                      fontSize: 19.0.sp,
+                      fontWeight: FontWeight.bold,
+                      color: const Color.fromRGBO(255, 178, 79, 1),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        preWeatherData.isEmpty ? "로딩중입니다" : preWeatherData[0],
+                        style: GoogleFonts.lato(
+                          fontSize: 40.0.sp,
+                          fontWeight: FontWeight.bold,
+                          color: const Color.fromRGBO(255, 178, 79, 1),
+                        ),
+                      ), //온도text
+                      Text(
+                        '\u00B0',
+                        style: GoogleFonts.lato(
+                          fontSize: 40.0.sp,
+                          fontWeight: FontWeight.bold,
+                          color: const Color.fromRGBO(255, 178, 79, 1),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        preWeatherData.isEmpty ? "로딩중입니다" : preWeatherData[1],
+                        style: GoogleFonts.lato(
+                          fontSize: 20.0.sp,
+                          fontWeight: FontWeight.bold,
+                          color: const Color.fromRGBO(255, 178, 79, 1),
+                        ),
+                      ),
+                      // Container(
+                      //   child: Image.network(
+                      //     preWeatherData[4],
+                      //     height: 30,
+                      //     width: 30,
+                      //     fit: BoxFit.fill,
+                      //   ),
+                      // ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5.h,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        '대기질 지수',
+                        style: GoogleFonts.lato(
+                          fontSize: 20.0.sp,
+                          fontWeight: FontWeight.bold,
+                          color: const Color.fromRGBO(255, 178, 79, 1),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      Text(
+                        preWeatherData.isEmpty ? "로딩중입니다" : preWeatherData[2],
+                        style: GoogleFonts.lato(
+                          fontSize: 35.0.sp,
+                          fontWeight: FontWeight.bold,
+                          color: const Color.fromRGBO(255, 178, 79, 1),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
