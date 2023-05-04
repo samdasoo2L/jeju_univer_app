@@ -16,7 +16,7 @@ class NowTime {
   List<String> timeCutting() {
     var nowTime = DateTime.now();
     var formatNowTime =
-        DateFormat('hh mm ss MM dd EEEE').format(nowTime).toString();
+        DateFormat('HH mm ss MM dd EEEE').format(nowTime).toString();
     List<String> nowTimeInfo = formatNowTime.split(" ");
     nowTimeInfo[5] = daysInfo[nowTimeInfo[5]]!;
     nowTimeInfo.add((int.parse(nowTimeInfo[0]) * 60 + int.parse(nowTimeInfo[1]))
