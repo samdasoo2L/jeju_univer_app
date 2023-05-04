@@ -2,9 +2,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:jeju_univer_app/bus_resource/bus_location.dart';
-
 import '../bus_resource/bus_info.dart';
+import '../bus_resource/bus_location.dart';
 import '../resources/time_resources.dart';
 
 class BusPage extends StatefulWidget {
