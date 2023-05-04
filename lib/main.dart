@@ -12,6 +12,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
+      minTextAdapt: true,
+      splitScreenMode: true,
       builder: (context, child) => const MaterialApp(
         home: HomePage(),
       ),
