@@ -165,53 +165,105 @@ class _MainPageState extends State<MainPage> {
                           height: 40.h,
                           width: 120.w,
                           decoration: BoxDecoration(
+                            color: const Color.fromRGBO(255, 178, 79, 1),
+                            borderRadius: BorderRadius.circular(15),
                             border: Border.all(
-                              color: const Color.fromRGBO(255, 178, 79, 1),
+                              color: const Color.fromARGB(255, 255, 174, 68),
                             ),
                           ),
-                          child: Text(
-                              "${nowTimeInfo[0]}:${nowTimeInfo[1]}:${nowTimeInfo[2]}"),
+                          child: Center(
+                            child: Text(
+                              "${nowTimeInfo[0]}:${nowTimeInfo[1]}:${nowTimeInfo[2]}",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
                         ),
                         SizedBox(
-                          height: 20.h,
+                          height: 10.h,
                         ),
                         Container(
-                          height: 80.h,
+                          height: 90.h,
                           width: 120.w,
                           decoration: BoxDecoration(
+                            color: const Color.fromRGBO(255, 178, 79, 1),
+                            borderRadius: BorderRadius.circular(15),
                             border: Border.all(
-                              color: const Color.fromRGBO(255, 178, 79, 1),
+                              color: const Color.fromARGB(255, 255, 174, 68),
                             ),
                           ),
                           child: Column(
                             children: [
+                              const SizedBox(
+                                height: 5,
+                              ),
                               const Text(
                                 "A코스",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500),
                               ),
-                              Text(
-                                aState,
+                              const SizedBox(
+                                height: 2,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                ),
+                                child: Text(
+                                  aState,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w400),
+                                ),
                               )
                             ],
                           ),
                         ),
                         SizedBox(
-                          height: 20.h,
+                          height: 10.h,
                         ),
                         Container(
-                          height: 80.h,
+                          height: 90.h,
                           width: 120.w,
                           decoration: BoxDecoration(
+                            color: const Color.fromRGBO(255, 178, 79, 1),
+                            borderRadius: BorderRadius.circular(15),
                             border: Border.all(
-                              color: const Color.fromRGBO(255, 178, 79, 1),
+                              color: const Color.fromARGB(255, 255, 174, 68),
                             ),
                           ),
                           child: Column(
                             children: [
+                              SizedBox(
+                                height: 5.h,
+                              ),
                               const Text(
                                 "B코스",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w500),
                               ),
-                              Text(
-                                bState,
+                              SizedBox(
+                                height: 2.h,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                ),
+                                child: Text(
+                                  bState,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.w400),
+                                ),
                               )
                             ],
                           ),
