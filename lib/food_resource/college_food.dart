@@ -105,34 +105,34 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  collegeFoodMenuList(
+                  CollegeFoodMenuList(
                       daylist: daylist,
                       collegeFoodMenu: collegeFoodMenu,
                       daysNumber: 0,
                       lunchMenuNumber: 2,
                       dinnerMenuNumber: 3),
-                  collegeFoodMenuList(
+                  CollegeFoodMenuList(
                     daylist: daylist,
                     collegeFoodMenu: collegeFoodMenu,
                     daysNumber: 1,
                     lunchMenuNumber: 8,
                     dinnerMenuNumber: 9,
                   ),
-                  collegeFoodMenuList(
+                  CollegeFoodMenuList(
                     daylist: daylist,
                     collegeFoodMenu: collegeFoodMenu,
                     daysNumber: 2,
                     lunchMenuNumber: 16,
                     dinnerMenuNumber: 17,
                   ),
-                  collegeFoodMenuList(
+                  CollegeFoodMenuList(
                     daylist: daylist,
                     collegeFoodMenu: collegeFoodMenu,
                     daysNumber: 3,
                     lunchMenuNumber: 24,
                     dinnerMenuNumber: 25,
                   ),
-                  collegeFoodMenuList(
+                  CollegeFoodMenuList(
                     daylist: daylist,
                     collegeFoodMenu: collegeFoodMenu,
                     daysNumber: 4,
@@ -165,8 +165,8 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
   }
 }
 
-class collegeFoodMenuList extends StatelessWidget {
-  const collegeFoodMenuList(
+class CollegeFoodMenuList extends StatelessWidget {
+  const CollegeFoodMenuList(
       {super.key,
       required this.daylist,
       required this.collegeFoodMenu,

@@ -110,7 +110,7 @@ class _BusPageState extends State<BusPage> {
         child: Stack(
           children: [
             Image.asset(
-              'assets/images/base.png',
+              'assets/images/page.png',
               fit: BoxFit.cover,
               height: double.infinity,
               width: double.infinity,

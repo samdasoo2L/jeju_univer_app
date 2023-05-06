@@ -14,6 +14,7 @@ class FiveWeatherData {
         '');
 
     var fiveweatherData = await network.getJsonData();
+    //print(fiveweatherData['list']);
 
     temp5 = fiveweatherData['list'][0]['main']['temp']
         .toDouble()
@@ -22,9 +23,6 @@ class FiveWeatherData {
     var condition = fiveweatherData['list'][0]['weather'][0]['id'];
     des5 = fiveweatherData['list'][0]['weather'][0]['description'].toString();
     icon5 = model.getWeatherIcon(condition);
-    print(temp5);
-    print(condition);
-    print(des5);
 
     return [
       temp5,

@@ -23,7 +23,7 @@ class _WeatherScreenState extends State<WeatherPage> {
   }
 
   Future<void> getUserOrder() async {
-    preWeatherData = await WeatherData().getLocation1();
+    preWeatherData = await WeatherData().getPreWeatherData();
     setState(() {});
   }
 
@@ -39,7 +39,7 @@ class _WeatherScreenState extends State<WeatherPage> {
         child: Stack(
           children: [
             Image.asset(
-              'assets/images/base.png',
+              'assets/images/page.png',
               fit: BoxFit.cover,
               height: double.infinity,
               width: double.infinity,
@@ -102,7 +102,9 @@ class _WeatherScreenState extends State<WeatherPage> {
       width: 330.w,
       height: 300.h,
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.black26),
+          border: Border.all(
+            color: const Color.fromRGBO(255, 178, 79, 1),
+          ),
           borderRadius: BorderRadius.circular(10)),
     );
   }
@@ -112,7 +114,9 @@ class _WeatherScreenState extends State<WeatherPage> {
       width: 330.w,
       height: 100.h,
       decoration: BoxDecoration(
-          border: Border.all(color: Colors.black26),
+          border: Border.all(
+            color: const Color.fromRGBO(255, 178, 79, 1),
+          ),
           borderRadius: BorderRadius.circular(10)),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -124,7 +128,9 @@ class _WeatherScreenState extends State<WeatherPage> {
               width: 100.w,
               height: 90.h,
               decoration: BoxDecoration(
-                border: Border.all(color: Colors.black12),
+                border: Border.all(
+                  color: const Color.fromRGBO(255, 178, 79, 1),
+                ),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Column(
@@ -200,14 +206,6 @@ class _WeatherScreenState extends State<WeatherPage> {
                           color: const Color.fromRGBO(255, 178, 79, 1),
                         ),
                       ),
-                      // Container(
-                      //   child: Image.network(
-                      //     preWeatherData[4],
-                      //     height: 30,
-                      //     width: 30,
-                      //     fit: BoxFit.fill,
-                      //   ),
-                      // ),
                     ],
                   ),
                   SizedBox(
@@ -236,6 +234,15 @@ class _WeatherScreenState extends State<WeatherPage> {
                       ),
                     ],
                   ),
+                ],
+              ),
+              Column(
+                children: [
+                  if (preWeatherData.isEmpty)
+                    const Text("이미지 로딩중")
+                  else
+                    Image.network(
+                        'https://openweathermap.org/img/wn/${preWeatherData[3]}@2x.png')
                 ],
               ),
             ],

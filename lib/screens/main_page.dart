@@ -1,10 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import '../bus_resource/bus_info.dart';
 import '../resources/time_resources.dart';
+import '../weather_resource/weather_api.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -25,11 +25,18 @@ class _MainPageState extends State<MainPage> {
   final List<int> bBusTimeLine = BusTimeLine().bTimeLine;
   final List<String> aBusStopLocation = BusStopLocation().aBusStopLocation;
   final List<String> bBusStopLocation = BusStopLocation().bBusStopLocation;
+  List<dynamic> preWeatherData = [];
 
   @override
   void initState() {
     super.initState();
     Timer.periodic(const Duration(seconds: 1), forTimeInfoUpdate);
+    getUserOrder();
+  }
+
+  Future<void> getUserOrder() async {
+    preWeatherData = await WeatherData().getPreWeatherData();
+    setState(() {});
   }
 
   void forTimeInfoUpdate(Timer timer) {
@@ -214,34 +221,88 @@ class _MainPageState extends State<MainPage> {
                     SizedBox(
                       width: 7.w,
                     ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 240.h,
-                          width: 100.w,
-                          decoration: BoxDecoration(
-                            border: Border.all(
+                    Container(
+                      height: 240.h,
+                      width: 200.w,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: const Color.fromRGBO(255, 178, 79, 1),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "날씨",
+                            style: GoogleFonts.lato(
+                              fontSize: 30.0.sp,
+                              fontWeight: FontWeight.bold,
                               color: const Color.fromRGBO(255, 178, 79, 1),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 7.w,
-                    ),
-                    Column(
-                      children: [
-                        Container(
-                          height: 240.h,
-                          width: 100.w,
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color.fromRGBO(255, 178, 79, 1),
-                            ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                preWeatherData.isEmpty
+                                    ? "로딩"
+                                    : preWeatherData[0],
+                                style: GoogleFonts.lato(
+                                  fontSize: 56.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromRGBO(255, 178, 79, 1),
+                                ),
+                              ), //온도text
+                              Text(
+                                '\u00B0',
+                                style: GoogleFonts.lato(
+                                  fontSize: 56.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromRGBO(255, 178, 79, 1),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                preWeatherData.isEmpty
+                                    ? "로딩"
+                                    : preWeatherData[1],
+                                style: GoogleFonts.lato(
+                                  fontSize: 20.0.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromRGBO(255, 178, 79, 1),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Column(
+                            children: [
+                              Text(
+                                '대기질 지수',
+                                style: GoogleFonts.lato(
+                                  fontSize: 15.0.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromRGBO(255, 178, 79, 1),
+                                ),
+                              ),
+                              Text(
+                                preWeatherData.isEmpty
+                                    ? "로딩"
+                                    : preWeatherData[2],
+                                style: GoogleFonts.lato(
+                                  fontSize: 25.0.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: const Color.fromRGBO(255, 178, 79, 1),
+                                ),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ],
                 ),
