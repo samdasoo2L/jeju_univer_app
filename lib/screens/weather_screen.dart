@@ -15,16 +15,14 @@ class _WeatherScreenState extends State<WeatherPage> {
   List<dynamic> preWeatherData = [];
   List<dynamic> fiveWeatherData = [];
   String? temp5;
-  String? des5;
   String? weatherIcon5;
   String? dtTxt5;
   List<String> listTemp5 = ["", "", "", "", "", "", "", "", "", ""];
   List<String> listweatherIcon5 = ["", "", "", "", "", "", "", "", "", ""];
   List<String> listdtTxt5 = ["", "", "", "", "", "", "", "", "", ""];
-  List<String> weeklistTemp5 = [];
-  List<String> weeklistdes5 = [];
-  List<String> weeklistweatherIcon5 = [];
-  List<String> weeklistdtTxt5 = [];
+  List<String> weekListTemp5 = ["", "", "", "", ""];
+  List<String> weekListweatherIcon5 = ["", "", "", "", ""];
+  List<String> weekListdtTxt5 = ["", "", "", "", ""];
 
   @override
   void initState() {
@@ -56,6 +54,19 @@ class _WeatherScreenState extends State<WeatherPage> {
       listTemp5[i] = temp5!;
       listweatherIcon5[i] = weatherIcon5!;
       listdtTxt5[i] = dtTxt5!;
+    }
+
+    for (int i = 0; i < 5; i++) {
+      temp5 = fiveweatherData['list'][i * 8]['main']['temp']
+          .toDouble()
+          .toInt()
+          .toString();
+      weatherIcon5 =
+          fiveweatherData['list'][i * 8]['weather'][0]['icon'].toString();
+      dtTxt5 = fiveweatherData['list'][i * 8]['dt_txt'];
+      weekListTemp5[i] = temp5!;
+      weekListweatherIcon5[i] = weatherIcon5!;
+      weekListdtTxt5[i] = dtTxt5!;
     }
 
     setState(() {});
@@ -129,12 +140,70 @@ class _WeatherScreenState extends State<WeatherPage> {
   Container WeekWeather() {
     return Container(
       width: 330.w,
-      height: 300.h,
+      height: 200.h,
       decoration: BoxDecoration(
-          border: Border.all(
-            color: const Color.fromRGBO(255, 178, 79, 1),
-          ),
-          borderRadius: BorderRadius.circular(10)),
+        border: Border.all(
+          color: const Color.fromRGBO(255, 178, 79, 1),
+        ),
+        borderRadius: BorderRadius.circular(10),
+        color: const Color.fromRGBO(255, 178, 79, 0.8),
+      ),
+      child: ListView.builder(
+        itemCount: 5,
+        itemBuilder: (context, int i) {
+          return Padding(
+            padding: const EdgeInsets.all(4.0),
+            child: Container(
+              width: 100.w,
+              height: 50.h,
+              decoration: BoxDecoration(
+                  border: Border.all(
+                    color: const Color.fromRGBO(255, 178, 79, 1),
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  if (weekListdtTxt5[0] == "")
+                    const Text("날짜 로딩중")
+                  else
+                    Text(
+                      weekListdtTxt5[i].substring(0, 10),
+                    ),
+                  SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: Column(
+                      children: [
+                        if (weekListweatherIcon5[0] == "")
+                          const Text("이미지 로딩중")
+                        else
+                          Image.network(
+                              'https://openweathermap.org/img/wn/${weekListweatherIcon5[i]}@2x.png')
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        weekListTemp5[i],
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                      const Text(
+                        '\u00B0',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 
@@ -198,17 +267,18 @@ class _WeatherScreenState extends State<WeatherPage> {
                     ],
                   ),
                   SizedBox(
-                      width: 50,
-                      height: 50,
-                      child: Column(
-                        children: [
-                          if (listweatherIcon5[0] == "")
-                            const Text("이미지 로딩중")
-                          else
-                            Image.network(
-                                'https://openweathermap.org/img/wn/${listweatherIcon5[i]}@2x.png')
-                        ],
-                      ))
+                    width: 50,
+                    height: 50,
+                    child: Column(
+                      children: [
+                        if (listweatherIcon5[0] == "")
+                          const Text("이미지 로딩중")
+                        else
+                          Image.network(
+                              'https://openweathermap.org/img/wn/${listweatherIcon5[i]}@2x.png')
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
