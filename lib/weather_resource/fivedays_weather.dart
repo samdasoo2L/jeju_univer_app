@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'data/network.dart';
 import 'model/model.dart';
 
@@ -6,7 +5,8 @@ class FiveWeatherData {
   Model model = Model();
   String? temp5;
   String? des5;
-  Widget? icon5;
+  String? weatherIcon5;
+  String? dtTxt;
 
   Future<List<dynamic>> getFiveWeatherData() async {
     Network network = Network(
@@ -20,15 +20,18 @@ class FiveWeatherData {
         .toDouble()
         .toInt()
         .toString();
-    var condition = fiveweatherData['list'][0]['weather'][0]['id'];
     des5 = fiveweatherData['list'][0]['weather'][0]['description'].toString();
-    icon5 = model.getWeatherIcon(condition);
+    weatherIcon5 = fiveweatherData['list'][0]['weather'][0]['icon'].toString();
+    dtTxt = fiveweatherData['list'][0]['dt_txt'];
+    // print(temp5);
+    // print(des5);
+    // print(weatherIcon5);
+    // print(dtTxt);
 
     return [
       temp5,
-      condition,
       des5,
-      icon5,
+      weatherIcon5,
     ];
   }
 }
