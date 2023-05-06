@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../weather_resource/fivedays_weather.dart';
+import '../weather_resource/data/network.dart';
 import '../weather_resource/weather_api.dart';
 
 class WeatherPage extends StatefulWidget {
@@ -14,6 +14,17 @@ class WeatherPage extends StatefulWidget {
 class _WeatherScreenState extends State<WeatherPage> {
   List<dynamic> preWeatherData = [];
   List<dynamic> fiveWeatherData = [];
+  String? temp5;
+  String? des5;
+  String? weatherIcon5;
+  String? dtTxt5;
+  List<String> listTemp5 = ["", "", "", "", "", "", "", "", "", ""];
+  List<String> listweatherIcon5 = ["", "", "", "", "", "", "", "", "", ""];
+  List<String> listdtTxt5 = ["", "", "", "", "", "", "", "", "", ""];
+  List<String> weeklistTemp5 = [];
+  List<String> weeklistdes5 = [];
+  List<String> weeklistweatherIcon5 = [];
+  List<String> weeklistdtTxt5 = [];
 
   @override
   void initState() {
@@ -28,7 +39,25 @@ class _WeatherScreenState extends State<WeatherPage> {
   }
 
   Future<void> getFiveWeather() async {
-    fiveWeatherData = await FiveWeatherData().getFiveWeatherData();
+    Network network = Network(
+        'https://api.openweathermap.org/data/2.5/forecast?lat=33.45604335551202&lon=126.56181488432678&appid=c663574adf4b2a0bb08b4f39cc021292&units=metric',
+        '');
+
+    var fiveweatherData = await network.getJsonData();
+
+    for (int i = 0; i <= 9; i++) {
+      temp5 = fiveweatherData['list'][i]['main']['temp']
+          .toDouble()
+          .toInt()
+          .toString();
+      weatherIcon5 =
+          fiveweatherData['list'][i]['weather'][0]['icon'].toString();
+      dtTxt5 = fiveweatherData['list'][i]['dt_txt'];
+      listTemp5[i] = temp5!;
+      listweatherIcon5[i] = weatherIcon5!;
+      listdtTxt5[i] = dtTxt5!;
+    }
+
     setState(() {});
   }
 
@@ -114,31 +143,72 @@ class _WeatherScreenState extends State<WeatherPage> {
       width: 330.w,
       height: 100.h,
       decoration: BoxDecoration(
-          border: Border.all(
-            color: const Color.fromRGBO(255, 178, 79, 1),
-          ),
-          borderRadius: BorderRadius.circular(10)),
+        border: Border.all(
+          color: const Color.fromRGBO(255, 178, 79, 1),
+        ),
+        borderRadius: BorderRadius.circular(10),
+        color: const Color.fromRGBO(255, 178, 79, 0.8),
+      ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: 10,
-        itemBuilder: (context, index) {
+        itemBuilder: (context, int i) {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
               width: 100.w,
               height: 90.h,
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: const Color.fromRGBO(255, 178, 79, 1),
-                ),
-                borderRadius: BorderRadius.circular(10),
-              ),
+                  border: Border.all(
+                    color: const Color.fromRGBO(255, 178, 79, 1),
+                  ),
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.white),
               child: Column(
                 children: [
                   SizedBox(
                     height: 3.h,
                   ),
-                  const Text("오늘 시간대"),
+                  Text(
+                    listdtTxt5[i]
+                        .replaceAll('2023-', '')
+                        .replaceAll("-", "/")
+                        .replaceAll(":00:00", "시"),
+                    style: TextStyle(
+                      color: const Color.fromRGBO(255, 178, 79, 1),
+                      fontSize: 16.sp,
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        listTemp5[i],
+                        style: TextStyle(
+                          color: const Color.fromRGBO(255, 178, 79, 1),
+                          fontSize: 20.sp,
+                        ),
+                      ),
+                      const Text(
+                        '\u00B0',
+                        style: TextStyle(
+                          color: Color.fromRGBO(255, 178, 79, 1),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                      width: 50,
+                      height: 50,
+                      child: Column(
+                        children: [
+                          if (listweatherIcon5[0] == "")
+                            const Text("이미지 로딩중")
+                          else
+                            Image.network(
+                                'https://openweathermap.org/img/wn/${listweatherIcon5[i]}@2x.png')
+                        ],
+                      ))
                 ],
               ),
             ),
