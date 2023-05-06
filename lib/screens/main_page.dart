@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../bus_resource/bus_info.dart';
+import '../food_resource/food_resource.dart';
 import '../resources/time_resources.dart';
 import '../weather_resource/weather_api.dart';
+import 'package:http/http.dart' as http;
+import 'package:html/dom.dart' as dom;
 
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -14,7 +17,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  List<String> nowTimeInfo = ["", "", "", "", "", "", ""];
+  List<String> nowTimeInfo = NowTime().timeCutting();
   int mainTime = 800;
   String daysData = "";
   String aState = "";
@@ -26,12 +29,30 @@ class _MainPageState extends State<MainPage> {
   final List<String> aBusStopLocation = BusStopLocation().aBusStopLocation;
   final List<String> bBusStopLocation = BusStopLocation().bBusStopLocation;
   List<dynamic> preWeatherData = [];
+  List<String> titles = [];
+  List<String> result = [];
+  List<List> collegeFoodMenu = [];
+  List<String> daytime = [];
+  List<String> daylist = ["로딩중", "로딩중", "로딩중", "로딩중", "로딩중"];
+  List<int> lunchMenuNumber = FoodList().lunchMenuNumber;
+  List<int> dinnerMenuNumber = FoodList().dinnerMenuNumber;
+  List<bool> todayMenuBool = FoodList().todayMenubool;
 
   @override
   void initState() {
     super.initState();
     Timer.periodic(const Duration(seconds: 1), forTimeInfoUpdate);
     getUserOrder();
+    getFoodData();
+  }
+
+  bool isAllFalse(List<bool> list) {
+    for (var element in list) {
+      if (element != false) {
+        return false;
+      }
+    }
+    return true;
   }
 
   Future<void> getUserOrder() async {
@@ -111,6 +132,49 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
+  Future getFoodData() async {
+    final url = Uri.parse('https://www.jejunu.ac.kr/camp/stud/foodmenu');
+    final response = await http.get(url);
+    dom.Document html = dom.Document.html(response.body);
+
+    var titles = html
+        .querySelectorAll('td.border_right.border_bottom.txt_center > p')
+        .map((element) => element.innerHtml.trim())
+        .toList();
+
+    List<String> result = titles.toList();
+
+    for (int i = 0; i < result.length; i++) {
+      collegeFoodMenu.add(result[i].split("<br>"));
+    }
+
+    var daytime = html
+        .querySelectorAll('table > tbody > tr > td:nth-child(1)')
+        .map((element) => element.innerHtml.trim())
+        .toList();
+
+    List<int> foodDayList = [0, 4, 8, 12, 16];
+    for (int i = 0; i <= 4; i++) {
+      daylist[i] = (daytime[foodDayList[i]].split("<br>")[0]);
+    }
+
+    // String todayInfo = "${nowTimeInfo[3]}/${nowTimeInfo[4]}";
+    String todayInfo = "05/15";
+
+    for (int i = 0; i <= 4; i++) {
+      if (daylist[i] == todayInfo) todayMenuBool[i] = true;
+    }
+
+    setState(
+      () {
+        this.titles = titles;
+        result = result;
+        collegeFoodMenu = collegeFoodMenu;
+        todayMenuBool = todayMenuBool;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -152,211 +216,323 @@ class _MainPageState extends State<MainPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 110.h,
+                  height: 100.h,
                 ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 10.w,
-                    ),
-                    Column(
+                SizedBox(
+                  height: 320.h,
+                  child: SingleChildScrollView(
+                    scrollDirection: Axis.vertical,
+                    child: Column(
                       children: [
-                        Container(
-                          height: 40.h,
-                          width: 120.w,
-                          decoration: BoxDecoration(
-                            color: const Color.fromRGBO(255, 178, 79, 1),
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: const Color.fromARGB(255, 255, 174, 68),
-                            ),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "${nowTimeInfo[0]}:${nowTimeInfo[1]}:${nowTimeInfo[2]}",
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 22,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
                         SizedBox(
-                          height: 10.h,
+                          width: 10.w,
                         ),
-                        Container(
-                          height: 90.h,
-                          width: 120.w,
-                          decoration: BoxDecoration(
-                            color: const Color.fromRGBO(255, 178, 79, 1),
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: const Color.fromARGB(255, 255, 174, 68),
-                            ),
-                          ),
-                          child: Column(
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              const Text(
-                                "A코스",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              const SizedBox(
-                                height: 2,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
+                              Container(
+                                height: 90.h,
+                                width: 90.w,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                    color:
+                                        const Color.fromARGB(255, 255, 174, 68),
+                                  ),
                                 ),
-                                child: Text(
-                                  aState,
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w400),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "${nowTimeInfo[3]}월 ${nowTimeInfo[4]}일",
+                                      style: const TextStyle(
+                                        color: Color.fromRGBO(255, 178, 79, 1),
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Text(
+                                      "${nowTimeInfo[0]}:${nowTimeInfo[1]}:${nowTimeInfo[2]}",
+                                      style: const TextStyle(
+                                        color: Color.fromRGBO(255, 178, 79, 1),
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: 90.h,
+                                width: 120.w,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                    color:
+                                        const Color.fromARGB(255, 255, 174, 68),
+                                  ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    const Text(
+                                      "A코스",
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 178, 79, 1),
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    const SizedBox(
+                                      height: 2,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                      ),
+                                      child: Text(
+                                        aState,
+                                        style: const TextStyle(
+                                            color:
+                                                Color.fromRGBO(255, 178, 79, 1),
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Container(
+                                height: 90.h,
+                                width: 120.w,
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                    color:
+                                        const Color.fromARGB(255, 255, 174, 68),
+                                  ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    SizedBox(
+                                      height: 5.h,
+                                    ),
+                                    const Text(
+                                      "B코스",
+                                      style: TextStyle(
+                                          color:
+                                              Color.fromRGBO(255, 178, 79, 1),
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 8,
+                                      ),
+                                      child: Text(
+                                        bState,
+                                        style: const TextStyle(
+                                            color:
+                                                Color.fromRGBO(255, 178, 79, 1),
+                                            fontSize: 17,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    )
+                                  ],
                                 ),
                               )
                             ],
                           ),
                         ),
                         SizedBox(
-                          height: 10.h,
+                          height: 15.h,
                         ),
-                        Container(
-                          height: 90.h,
-                          width: 120.w,
-                          decoration: BoxDecoration(
-                            color: const Color.fromRGBO(255, 178, 79, 1),
-                            borderRadius: BorderRadius.circular(15),
-                            border: Border.all(
-                              color: const Color.fromARGB(255, 255, 174, 68),
-                            ),
-                          ),
-                          child: Column(
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              SizedBox(
-                                height: 5.h,
-                              ),
-                              const Text(
-                                "B코스",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                              SizedBox(
-                                height: 2.h,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 8,
+                              Container(
+                                  height: 240.h,
+                                  width: 165.w,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(15),
+                                    border: Border.all(
+                                      color:
+                                          const Color.fromRGBO(255, 178, 79, 1),
+                                    ),
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      if (isAllFalse(todayMenuBool))
+                                        const Padding(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 20),
+                                          child: Icon(
+                                            Icons
+                                                .sentiment_satisfied_alt_outlined,
+                                            size: 100,
+                                            color:
+                                                Color.fromRGBO(255, 178, 79, 1),
+                                          ),
+                                        )
+                                      else
+                                        for (var i = 0; i <= 4; i++)
+                                          if (todayMenuBool[i])
+                                            SizedBox(
+                                              height: 235.h,
+                                              child: SingleChildScrollView(
+                                                child: Column(
+                                                  children: [
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Text(
+                                                      "${daylist[i]} 백두관 점심",
+                                                      style: const TextStyle(
+                                                        color: Color.fromRGBO(
+                                                            255, 178, 79, 1),
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    for (var name1
+                                                        in collegeFoodMenu[
+                                                            lunchMenuNumber[i]])
+                                                      Text(
+                                                        name1.replaceAll(
+                                                            'amp;', ''),
+                                                        style: const TextStyle(
+                                                          color: Color.fromRGBO(
+                                                              255, 178, 79, 1),
+                                                          fontSize: 15,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                    ],
+                                  )),
+                              Container(
+                                height: 240.h,
+                                width: 165.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                    color:
+                                        const Color.fromRGBO(255, 178, 79, 1),
+                                  ),
                                 ),
-                                child: Text(
-                                  bState,
-                                  style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w400),
+                                child: Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "날씨",
+                                      style: GoogleFonts.lato(
+                                        fontSize: 30.0.sp,
+                                        fontWeight: FontWeight.bold,
+                                        color: const Color.fromRGBO(
+                                            255, 178, 79, 1),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          preWeatherData.isEmpty
+                                              ? "로딩"
+                                              : preWeatherData[0],
+                                          style: GoogleFonts.lato(
+                                            fontSize: 56.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color.fromRGBO(
+                                                255, 178, 79, 1),
+                                          ),
+                                        ), //온도text
+                                        Text(
+                                          '\u00B0',
+                                          style: GoogleFonts.lato(
+                                            fontSize: 56.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color.fromRGBO(
+                                                255, 178, 79, 1),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          preWeatherData.isEmpty
+                                              ? "로딩"
+                                              : preWeatherData[1],
+                                          style: GoogleFonts.lato(
+                                            fontSize: 20.0.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color.fromRGBO(
+                                                255, 178, 79, 1),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                          '대기질 지수',
+                                          style: GoogleFonts.lato(
+                                            fontSize: 15.0.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color.fromRGBO(
+                                                255, 178, 79, 1),
+                                          ),
+                                        ),
+                                        Text(
+                                          preWeatherData.isEmpty
+                                              ? "로딩"
+                                              : preWeatherData[2],
+                                          style: GoogleFonts.lato(
+                                            fontSize: 25.0.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: const Color.fromRGBO(
+                                                255, 178, 79, 1),
+                                          ),
+                                        ),
+                                      ],
+                                    )
+                                  ],
                                 ),
-                              )
+                              ),
                             ],
                           ),
-                        )
+                        ),
                       ],
                     ),
-                    SizedBox(
-                      width: 7.w,
-                    ),
-                    Container(
-                      height: 240.h,
-                      width: 200.w,
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color.fromRGBO(255, 178, 79, 1),
-                        ),
-                      ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "날씨",
-                            style: GoogleFonts.lato(
-                              fontSize: 30.0.sp,
-                              fontWeight: FontWeight.bold,
-                              color: const Color.fromRGBO(255, 178, 79, 1),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                preWeatherData.isEmpty
-                                    ? "로딩"
-                                    : preWeatherData[0],
-                                style: GoogleFonts.lato(
-                                  fontSize: 56.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color.fromRGBO(255, 178, 79, 1),
-                                ),
-                              ), //온도text
-                              Text(
-                                '\u00B0',
-                                style: GoogleFonts.lato(
-                                  fontSize: 56.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color.fromRGBO(255, 178, 79, 1),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                preWeatherData.isEmpty
-                                    ? "로딩"
-                                    : preWeatherData[1],
-                                style: GoogleFonts.lato(
-                                  fontSize: 20.0.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color.fromRGBO(255, 178, 79, 1),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            children: [
-                              Text(
-                                '대기질 지수',
-                                style: GoogleFonts.lato(
-                                  fontSize: 15.0.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color.fromRGBO(255, 178, 79, 1),
-                                ),
-                              ),
-                              Text(
-                                preWeatherData.isEmpty
-                                    ? "로딩"
-                                    : preWeatherData[2],
-                                style: GoogleFonts.lato(
-                                  fontSize: 25.0.sp,
-                                  fontWeight: FontWeight.bold,
-                                  color: const Color.fromRGBO(255, 178, 79, 1),
-                                ),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ],
+                  ),
                 ),
               ],
             ),

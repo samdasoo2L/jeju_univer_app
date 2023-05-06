@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
+import 'package:jeju_univer_app/resources/time_resources.dart';
+
+import 'food_resource.dart';
 
 Future<dynamic> collegeFoodMenu(BuildContext context) async {
   await showDialog<void>(
@@ -24,13 +27,16 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
   List<String> result = [];
   List<List> collegeFoodMenu = [];
   List<String> daytime = [];
-  List<String> daylist = [];
+  List<String> daylist = ["로딩중", "로딩중", "로딩중", "로딩중", "로딩중"];
+  List<int> lunchMenuNumber = FoodList().lunchMenuNumber;
+  List<int> dinnerMenuNumber = FoodList().dinnerMenuNumber;
+  List<bool> todayMenuBool = FoodList().todayMenubool;
+  List<String> todayNumSource = NowTime().timeCutting();
 
   @override
   void initState() {
     super.initState();
     getWebsiteData();
-    setState(() {});
   }
 
   Future getWebsiteData() async {
@@ -54,8 +60,16 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
         .map((element) => element.innerHtml.trim())
         .toList();
 
-    for (int i = 0; i < 18; i += 4) {
-      daylist.add(daytime[i].split("<br>")[0]);
+    List<int> foodDayList = [0, 4, 8, 12, 16];
+    for (int i = 0; i <= 4; i++) {
+      daylist[i] = (daytime[foodDayList[i]].split("<br>")[0]);
+    }
+
+    String todayInfo = "${todayNumSource[3]}/${todayNumSource[4]}";
+    // String todayInfo = "05/01";
+
+    for (int i = 0; i <= 4; i++) {
+      if (daylist[i] == todayInfo) todayMenuBool[i] = true;
     }
 
     setState(
@@ -63,6 +77,8 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
         this.titles = titles;
         result = result;
         collegeFoodMenu = collegeFoodMenu;
+        todayMenuBool = todayMenuBool;
+        print(todayInfo);
       },
     );
   }
@@ -105,40 +121,14 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  CollegeFoodMenuList(
-                      daylist: daylist,
-                      collegeFoodMenu: collegeFoodMenu,
-                      daysNumber: 0,
-                      lunchMenuNumber: 2,
-                      dinnerMenuNumber: 3),
-                  CollegeFoodMenuList(
-                    daylist: daylist,
-                    collegeFoodMenu: collegeFoodMenu,
-                    daysNumber: 1,
-                    lunchMenuNumber: 8,
-                    dinnerMenuNumber: 9,
-                  ),
-                  CollegeFoodMenuList(
-                    daylist: daylist,
-                    collegeFoodMenu: collegeFoodMenu,
-                    daysNumber: 2,
-                    lunchMenuNumber: 16,
-                    dinnerMenuNumber: 17,
-                  ),
-                  CollegeFoodMenuList(
-                    daylist: daylist,
-                    collegeFoodMenu: collegeFoodMenu,
-                    daysNumber: 3,
-                    lunchMenuNumber: 24,
-                    dinnerMenuNumber: 25,
-                  ),
-                  CollegeFoodMenuList(
-                    daylist: daylist,
-                    collegeFoodMenu: collegeFoodMenu,
-                    daysNumber: 4,
-                    lunchMenuNumber: 32,
-                    dinnerMenuNumber: 33,
-                  ),
+                  for (var i = 0; i <= 4; i++)
+                    CollegeFoodMenuList(
+                        daylist: daylist,
+                        collegeFoodMenu: collegeFoodMenu,
+                        daysNumber: i,
+                        lunchMenuNumber: lunchMenuNumber[i],
+                        dinnerMenuNumber: dinnerMenuNumber[i],
+                        todayMenuBool: todayMenuBool[i]),
                 ],
               ),
             ),
@@ -172,13 +162,15 @@ class CollegeFoodMenuList extends StatelessWidget {
       required this.collegeFoodMenu,
       required this.daysNumber,
       required this.lunchMenuNumber,
-      required this.dinnerMenuNumber});
+      required this.dinnerMenuNumber,
+      required this.todayMenuBool});
 
   final List<String> daylist;
   final List<List> collegeFoodMenu;
   final int daysNumber;
   final int lunchMenuNumber;
   final int dinnerMenuNumber;
+  final bool todayMenuBool;
 
   @override
   Widget build(BuildContext context) {
@@ -201,6 +193,7 @@ class CollegeFoodMenuList extends StatelessWidget {
                 Text(
                   daylist.isEmpty ? "로딩중입니다" : daylist[daysNumber],
                   style: TextStyle(
+                    color: todayMenuBool ? Colors.amber[800] : Colors.black,
                     fontSize: 15.sp,
                   ),
                 ),
@@ -213,10 +206,10 @@ class CollegeFoodMenuList extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       flex: 1,
                       child: Column(
-                        children: const [
+                        children: [
                           Text('점심'),
                         ],
                       ),
@@ -242,10 +235,10 @@ class CollegeFoodMenuList extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       flex: 1,
                       child: Column(
-                        children: const [
+                        children: [
                           Text('저녁'),
                         ],
                       ),
