@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../bus_resource/bus_dialog.dart';
 import '../bus_resource/bus_info.dart';
 import '../bus_resource/bus_location.dart';
 import '../resources/time_resources.dart';
@@ -139,51 +140,190 @@ class _BusPageState extends State<BusPage> {
                   const SizedBox(
                     height: 110,
                   ),
-                  Text(
-                    "${nowTimeInfo[0]}:${nowTimeInfo[1]}:${nowTimeInfo[2]}",
-                    style: const TextStyle(
-                      fontSize: 30,
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color.fromARGB(255, 255, 165, 47),
+                      ),
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 28,
+                        vertical: 5,
+                      ),
+                      child: Text(
+                        "${nowTimeInfo[0]}:${nowTimeInfo[1]}:${nowTimeInfo[2]}",
+                        style: const TextStyle(
+                          fontSize: 30,
+                          color: Color.fromARGB(255, 255, 174, 68),
+                        ),
+                      ),
                     ),
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            const Text(
-                              "A코스",
+                      Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: const Color.fromARGB(255, 255, 165, 47),
+                              ),
                             ),
-                            Text(aState),
-                            for (var i = 0; i < 11; i++)
-                              BusNowLocationShow(
-                                  busStopName: aBusStopLocation[i],
-                                  stopBool:
-                                      aNowLocationBool[aBusStopLocation[i]] ??=
-                                          false),
-                          ],
-                        ),
+                            width: 160.w,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Column(
+                                children: [
+                                  const Text(
+                                    "A코스",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w800,
+                                      color: Color.fromARGB(255, 255, 174, 68),
+                                    ),
+                                  ),
+                                  Text(
+                                    aState,
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromARGB(255, 255, 174, 68),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 160.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10)),
+                                  border: Border.all(
+                                    color:
+                                        const Color.fromRGBO(255, 178, 79, 1),
+                                  ),
+                                ),
+                                child: TextButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            BusDialog());
+                                  },
+                                  child: const Text(
+                                    "A코스 시간표",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color.fromRGBO(255, 178, 79, 1),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color:
+                                      const Color.fromARGB(255, 255, 174, 68),
+                                ),
+                              ),
+                              width: 160.w,
+                              height: 180.h,
+                              child: SingleChildScrollView(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 10,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      for (var i = 0; i <= 11; i++)
+                                        BusNowLocationShow(
+                                            busStopName: aBusStopLocation[i],
+                                            stopBool: aNowLocationBool[
+                                                aBusStopLocation[i]] ??= false),
+                                    ],
+                                  ),
+                                ),
+                              ))
+                        ],
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            const Text(
-                              "B코스",
+                      Column(
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              border: Border.all(
+                                color: const Color.fromARGB(255, 255, 165, 47),
+                              ),
                             ),
-                            Text(bState),
-                            for (var i = 0; i < 11; i++)
-                              BusNowLocationShow(
-                                  busStopName: bBusStopLocation[i],
-                                  stopBool:
-                                      bNowLocationBool[bBusStopLocation[i]] ??=
-                                          false)
-                          ],
-                        ),
+                            width: 160.w,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Column(
+                                children: [
+                                  const Text(
+                                    "A코스",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w800,
+                                      color: Color.fromARGB(255, 255, 174, 68),
+                                    ),
+                                  ),
+                                  Text(
+                                    aState,
+                                    style: const TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color.fromARGB(255, 255, 174, 68),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(
+                                  color:
+                                      const Color.fromARGB(255, 255, 174, 68),
+                                ),
+                              ),
+                              width: 160.w,
+                              height: 180.h,
+                              child: SingleChildScrollView(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 10,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      for (var i = 0; i <= 11; i++)
+                                        BusNowLocationShow(
+                                            busStopName: aBusStopLocation[i],
+                                            stopBool: aNowLocationBool[
+                                                aBusStopLocation[i]] ??= false),
+                                    ],
+                                  ),
+                                ),
+                              ))
+                        ],
                       ),
                     ],
                   )

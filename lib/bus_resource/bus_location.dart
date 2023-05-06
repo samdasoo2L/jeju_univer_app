@@ -12,18 +12,41 @@ class BusNowLocationShow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        children: [
-          Text(
-            stopBool ? "여기!" : "놉..",
-          ),
-          const SizedBox(
-            width: 15,
-          ),
-          Text(
-            busStopName,
-          ),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 3),
+        child: Row(
+          children: [
+            const SizedBox(
+              width: 25,
+            ),
+            Text(
+              stopBool ? "⚫" : "⚪",
+              style: const TextStyle(fontSize: 16),
+            ),
+            const SizedBox(
+              width: 20,
+            ),
+            const Text(
+              "|",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w900,
+                color: Color.fromARGB(255, 255, 145, 0),
+              ),
+            ),
+            const SizedBox(
+              width: 8,
+            ),
+            Text(
+              busStopName,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: Color.fromARGB(255, 255, 174, 68),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
