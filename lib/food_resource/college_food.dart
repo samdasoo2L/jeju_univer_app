@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
-import 'package:jeju_univer_app/resources/time_resources.dart';
 
+import '../resources/time_resources.dart';
 import 'food_resource.dart';
 
 Future<dynamic> collegeFoodMenu(BuildContext context) async {
@@ -94,7 +94,7 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
           Container(
             width: 400.w,
             height: 500.h,
-            margin: const EdgeInsets.only(top: 13.0, right: 8.0),
+            margin: const EdgeInsets.only(top: 0.0, right: 0.0),
             decoration: BoxDecoration(
               color: Colors.white,
               shape: BoxShape.rectangle,
@@ -206,10 +206,10 @@ class CollegeFoodMenuList extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       flex: 1,
                       child: Column(
-                        children: [
+                        children: const [
                           Text('점심'),
                         ],
                       ),
@@ -235,10 +235,10 @@ class CollegeFoodMenuList extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       flex: 1,
                       child: Column(
-                        children: [
+                        children: const [
                           Text('저녁'),
                         ],
                       ),

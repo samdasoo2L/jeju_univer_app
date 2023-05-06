@@ -158,8 +158,8 @@ class _MainPageState extends State<MainPage> {
       daylist[i] = (daytime[foodDayList[i]].split("<br>")[0]);
     }
 
-    // String todayInfo = "${nowTimeInfo[3]}/${nowTimeInfo[4]}";
-    String todayInfo = "05/15";
+    String todayInfo = "${nowTimeInfo[3]}/${nowTimeInfo[4]}";
+    // String todayInfo = "05/02";
 
     for (int i = 0; i <= 4; i++) {
       if (daylist[i] == todayInfo) todayMenuBool[i] = true;
@@ -248,9 +248,10 @@ class _MainPageState extends State<MainPage> {
                                   children: [
                                     Text(
                                       "${nowTimeInfo[3]}월 ${nowTimeInfo[4]}일",
-                                      style: const TextStyle(
-                                        color: Color.fromRGBO(255, 178, 79, 1),
-                                        fontSize: 18,
+                                      style: TextStyle(
+                                        color: const Color.fromRGBO(
+                                            255, 178, 79, 1),
+                                        fontSize: 15.sp,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
@@ -259,9 +260,10 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                     Text(
                                       "${nowTimeInfo[0]}:${nowTimeInfo[1]}:${nowTimeInfo[2]}",
-                                      style: const TextStyle(
-                                        color: Color.fromRGBO(255, 178, 79, 1),
-                                        fontSize: 22,
+                                      style: TextStyle(
+                                        color: const Color.fromRGBO(
+                                            255, 178, 79, 1),
+                                        fontSize: 18.sp,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
