@@ -39,6 +39,8 @@ class WeatherData {
         return "눈";
       } else if (des == 'mist') {
         return "안개";
+      } else if (des == 'broken clouds') {
+        return "흐림";
       }
       return des;
     }
