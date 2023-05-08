@@ -38,8 +38,8 @@ class FoodPage extends StatelessWidget {
                   SizedBox(
                     height: 50.h,
                   ),
-                  const Row(
-                    children: [
+                  Row(
+                    children: const [
                       SizedBox(
                         width: 35,
                       ),
