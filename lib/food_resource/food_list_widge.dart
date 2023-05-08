@@ -52,10 +52,10 @@ class CollegeFoodMenuList extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       flex: 1,
                       child: Column(
-                        children: [
+                        children: const [
                           Text('점심'),
                         ],
                       ),
@@ -81,10 +81,10 @@ class CollegeFoodMenuList extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       flex: 1,
                       child: Column(
-                        children: [
+                        children: const [
                           Text('저녁'),
                         ],
                       ),
