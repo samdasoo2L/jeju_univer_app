@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
 
 import '../resources/time_resources.dart';
+import 'food_list_widge.dart';
 import 'food_resource.dart';
 
 Future<dynamic> collegeFoodMenu(BuildContext context) async {
@@ -53,6 +54,16 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
 
     for (int i = 0; i < result.length; i++) {
       collegeFoodMenu.add(result[i].split("<br>"));
+    }
+
+    int daysNum = 0;
+    for (int i = 0; i < collegeFoodMenu.length; i++) {
+      if (collegeFoodMenu[i][0] != "없음") {
+        lunchMenuNumber[daysNum] = i;
+        dinnerMenuNumber[daysNum] = i + 1;
+        i += 1;
+        daysNum += 1;
+      }
     }
 
     var daytime = html
@@ -147,117 +158,6 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
                   child: Icon(Icons.close, color: Colors.black),
                 ),
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CollegeFoodMenuList extends StatelessWidget {
-  const CollegeFoodMenuList(
-      {super.key,
-      required this.daylist,
-      required this.collegeFoodMenu,
-      required this.daysNumber,
-      required this.lunchMenuNumber,
-      required this.dinnerMenuNumber,
-      required this.todayMenuBool});
-
-  final List<String> daylist;
-  final List<List> collegeFoodMenu;
-  final int daysNumber;
-  final int lunchMenuNumber;
-  final int dinnerMenuNumber;
-  final bool todayMenuBool;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 8, bottom: 8),
-      decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(
-            color: Colors.black26,
-          ),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Expanded(
-            flex: 1,
-            child: Column(
-              children: [
-                Text(
-                  daylist.isEmpty ? "로딩중입니다" : daylist[daysNumber],
-                  style: TextStyle(
-                    color: todayMenuBool ? Colors.amber[800] : Colors.black,
-                    fontSize: 15.sp,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: const [
-                          Text('점심'),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        children: [
-                          if (collegeFoodMenu.isEmpty)
-                            const Text("로딩중")
-                          else
-                            for (var name1 in collegeFoodMenu[lunchMenuNumber])
-                              Text(
-                                name1.replaceAll('amp;', ''),
-                              ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: const [
-                          Text('저녁'),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        children: [
-                          if (collegeFoodMenu.isEmpty)
-                            const Text("로딩중")
-                          else
-                            for (var name1 in collegeFoodMenu[dinnerMenuNumber])
-                              Text(name1),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ],
             ),
           ),
         ],
