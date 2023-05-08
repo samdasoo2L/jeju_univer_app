@@ -33,6 +33,10 @@ class WeatherData {
         return "소나기";
       } else if (des == 'rain') {
         return "비";
+      } else if (des == 'heavy intensity rain') {
+        return "강우";
+      } else if (des == 'moderate rain') {
+        return "비";
       } else if (des == 'thunderstorm') {
         return "뇌우";
       } else if (des == 'snow') {
@@ -41,6 +45,10 @@ class WeatherData {
         return "안개";
       } else if (des == 'broken clouds') {
         return "흐림";
+      } else if (des == 'overcast clouds') {
+        return "흐림";
+      } else if (des == 'light intensity drizzle') {
+        return "실안개";
       }
       return des;
     }
