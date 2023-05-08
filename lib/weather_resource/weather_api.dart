@@ -45,6 +45,8 @@ class WeatherData {
         return "안개";
       } else if (des == 'broken clouds') {
         return "흐림";
+      } else if (des == 'scattered clouds') {
+        return "대체로 흐림";
       } else if (des == 'overcast clouds') {
         return "흐림";
       } else if (des == 'light intensity drizzle') {

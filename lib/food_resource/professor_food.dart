@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CustomDialog extends StatelessWidget {
   const CustomDialog({super.key});
@@ -34,31 +33,23 @@ class CustomDialog extends StatelessWidget {
                     offset: Offset(0.0, 0.0),
                   ),
                 ]),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: PageView(
               children: [
-                Text(
-                  "고기국수",
-                  style: GoogleFonts.lato(
-                    fontSize: 30.sp,
-                    fontWeight: FontWeight.bold,
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Image.asset(
+                    'assets/professorfoods/gogiguksu.png',
+                    fit: BoxFit.cover,
                   ),
                 ),
-                Text(
-                  "고기국밥",
-                  style: GoogleFonts.lato(
-                    fontSize: 30.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
+                Container(
+                  child: const Text("국밥 이미지 준비중"),
                 ),
-                Text(
-                  "순두부찌개",
-                  style: GoogleFonts.lato(
-                    fontSize: 30.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Container(
+                  child: const Text("순두부찌개 이미지 준비중"),
+                )
               ],
             ),
           ),
