@@ -38,8 +38,8 @@ class FoodPage extends StatelessWidget {
                   SizedBox(
                     height: 50.h,
                   ),
-                  Row(
-                    children: const [
+                  const Row(
+                    children: [
                       SizedBox(
                         width: 35,
                       ),
@@ -65,6 +65,7 @@ class FoodPage extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(19)),
                           border: Border.all(
+                            width: 2,
                             color: const Color.fromRGBO(255, 178, 79, 1),
                           ),
                         ),
@@ -78,7 +79,7 @@ class FoodPage extends StatelessWidget {
                             "백두관 식당",
                             style: TextStyle(
                               fontSize: 30,
-                              color: Color.fromRGBO(255, 178, 79, 1),
+                              color: Colors.black,
                             ),
                           ),
                         ),
@@ -98,6 +99,7 @@ class FoodPage extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(19)),
                           border: Border.all(
+                            width: 2,
                             color: const Color.fromRGBO(255, 178, 79, 1),
                           ),
                         ),
@@ -112,7 +114,7 @@ class FoodPage extends StatelessWidget {
                             "교수회관",
                             style: TextStyle(
                               fontSize: 30,
-                              color: Color.fromRGBO(255, 178, 79, 1),
+                              color: Colors.black,
                             ),
                           ),
                         ),
@@ -132,6 +134,7 @@ class FoodPage extends StatelessWidget {
                           borderRadius:
                               const BorderRadius.all(Radius.circular(19)),
                           border: Border.all(
+                            width: 2,
                             color: const Color.fromRGBO(255, 178, 79, 1),
                           ),
                         ),
@@ -144,7 +147,7 @@ class FoodPage extends StatelessWidget {
                             "기숙사 식당",
                             style: TextStyle(
                               fontSize: 30,
-                              color: Color.fromRGBO(255, 178, 79, 1),
+                              color: Colors.black,
                             ),
                           ),
                         ),

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../bus_resource/bus_info.dart';
-import '../food_resource/food_resource.dart';
 import '../resources/time_resources.dart';
 import '../weather_resource/weather_api.dart';
 import 'package:http/http.dart' as http;
@@ -34,9 +33,9 @@ class _MainPageState extends State<MainPage> {
   List<List> collegeFoodMenu = [];
   List<String> daytime = [];
   List<String> daylist = ["로딩중", "로딩중", "로딩중", "로딩중", "로딩중"];
-  List<int> lunchMenuNumber = FoodList().lunchMenuNumber;
-  List<int> dinnerMenuNumber = FoodList().dinnerMenuNumber;
-  List<bool> todayMenuBool = FoodList().todayMenubool;
+  List<int> lunchMenuNumber = [0, 0, 0, 0, 0];
+  List<int> dinnerMenuNumber = [0, 0, 0, 0, 0];
+  List<bool> todayMenuBool = [false, false, false, false, false];
 
   @override
   void initState() {
@@ -148,6 +147,16 @@ class _MainPageState extends State<MainPage> {
       collegeFoodMenu.add(result[i].split("<br>"));
     }
 
+    int daysNum = 0;
+    for (int i = 0; i < collegeFoodMenu.length; i++) {
+      if (collegeFoodMenu[i][0] != "없음") {
+        lunchMenuNumber[daysNum] = i;
+        dinnerMenuNumber[daysNum] = i + 1;
+        i += 1;
+        daysNum += 1;
+      }
+    }
+
     var daytime = html
         .querySelectorAll('table > tbody > tr > td:nth-child(1)')
         .map((element) => element.innerHtml.trim())
@@ -237,6 +246,7 @@ class _MainPageState extends State<MainPage> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(
+                                  width: 3,
                                   color:
                                       const Color.fromARGB(255, 255, 174, 68),
                                 ),
@@ -247,8 +257,6 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     "${nowTimeInfo[3]}월 ${nowTimeInfo[4]}일",
                                     style: TextStyle(
-                                      color:
-                                          const Color.fromRGBO(255, 178, 79, 1),
                                       fontSize: 15.sp,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -259,8 +267,6 @@ class _MainPageState extends State<MainPage> {
                                   Text(
                                     "${nowTimeInfo[0]}:${nowTimeInfo[1]}:${nowTimeInfo[2]}",
                                     style: TextStyle(
-                                      color:
-                                          const Color.fromRGBO(255, 178, 79, 1),
                                       fontSize: 18.sp,
                                       fontWeight: FontWeight.w600,
                                     ),
@@ -275,6 +281,7 @@ class _MainPageState extends State<MainPage> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(
+                                  width: 3,
                                   color:
                                       const Color.fromARGB(255, 255, 174, 68),
                                 ),
@@ -287,7 +294,6 @@ class _MainPageState extends State<MainPage> {
                                   const Text(
                                     "A코스",
                                     style: TextStyle(
-                                        color: Color.fromRGBO(255, 178, 79, 1),
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600),
                                   ),
@@ -301,8 +307,6 @@ class _MainPageState extends State<MainPage> {
                                     child: Text(
                                       aState,
                                       style: const TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 178, 79, 1),
                                           fontSize: 17,
                                           fontWeight: FontWeight.w400),
                                     ),
@@ -317,6 +321,7 @@ class _MainPageState extends State<MainPage> {
                                 color: Colors.white,
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(
+                                  width: 3,
                                   color:
                                       const Color.fromARGB(255, 255, 174, 68),
                                 ),
@@ -329,7 +334,6 @@ class _MainPageState extends State<MainPage> {
                                   const Text(
                                     "B코스",
                                     style: TextStyle(
-                                        color: Color.fromRGBO(255, 178, 79, 1),
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600),
                                   ),
@@ -343,8 +347,6 @@ class _MainPageState extends State<MainPage> {
                                     child: Text(
                                       bState,
                                       style: const TextStyle(
-                                          color:
-                                              Color.fromRGBO(255, 178, 79, 1),
                                           fontSize: 17,
                                           fontWeight: FontWeight.w400),
                                     ),
@@ -369,6 +371,7 @@ class _MainPageState extends State<MainPage> {
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15),
                                   border: Border.all(
+                                    width: 3,
                                     color:
                                         const Color.fromRGBO(255, 178, 79, 1),
                                   ),
@@ -383,8 +386,6 @@ class _MainPageState extends State<MainPage> {
                                           Icons
                                               .sentiment_satisfied_alt_outlined,
                                           size: 100,
-                                          color:
-                                              Color.fromRGBO(255, 178, 79, 1),
                                         ),
                                       )
                                     else
@@ -401,8 +402,6 @@ class _MainPageState extends State<MainPage> {
                                                   Text(
                                                     "${daylist[i]} 백두관 점심",
                                                     style: const TextStyle(
-                                                      color: Color.fromRGBO(
-                                                          255, 178, 79, 1),
                                                       fontSize: 20,
                                                       fontWeight:
                                                           FontWeight.w600,
@@ -418,8 +417,6 @@ class _MainPageState extends State<MainPage> {
                                                       name1.replaceAll(
                                                           'amp;', ''),
                                                       style: const TextStyle(
-                                                        color: Color.fromRGBO(
-                                                            255, 178, 79, 1),
                                                         fontSize: 15,
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -437,6 +434,7 @@ class _MainPageState extends State<MainPage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                                 border: Border.all(
+                                  width: 3,
                                   color: const Color.fromRGBO(255, 178, 79, 1),
                                 ),
                               ),
@@ -450,8 +448,6 @@ class _MainPageState extends State<MainPage> {
                                     style: GoogleFonts.lato(
                                       fontSize: 30.0.sp,
                                       fontWeight: FontWeight.bold,
-                                      color:
-                                          const Color.fromRGBO(255, 178, 79, 1),
                                     ),
                                   ),
                                   Row(
@@ -464,8 +460,6 @@ class _MainPageState extends State<MainPage> {
                                         style: GoogleFonts.lato(
                                           fontSize: 56.sp,
                                           fontWeight: FontWeight.bold,
-                                          color: const Color.fromRGBO(
-                                              255, 178, 79, 1),
                                         ),
                                       ), //온도text
                                       Text(
@@ -473,8 +467,6 @@ class _MainPageState extends State<MainPage> {
                                         style: GoogleFonts.lato(
                                           fontSize: 56.sp,
                                           fontWeight: FontWeight.bold,
-                                          color: const Color.fromRGBO(
-                                              255, 178, 79, 1),
                                         ),
                                       ),
                                     ],
@@ -489,8 +481,6 @@ class _MainPageState extends State<MainPage> {
                                         style: GoogleFonts.lato(
                                           fontSize: 20.0.sp,
                                           fontWeight: FontWeight.bold,
-                                          color: const Color.fromRGBO(
-                                              255, 178, 79, 1),
                                         ),
                                       ),
                                     ],
@@ -502,8 +492,6 @@ class _MainPageState extends State<MainPage> {
                                         style: GoogleFonts.lato(
                                           fontSize: 15.0.sp,
                                           fontWeight: FontWeight.bold,
-                                          color: const Color.fromRGBO(
-                                              255, 178, 79, 1),
                                         ),
                                       ),
                                       Text(
@@ -513,8 +501,6 @@ class _MainPageState extends State<MainPage> {
                                         style: GoogleFonts.lato(
                                           fontSize: 25.0.sp,
                                           fontWeight: FontWeight.bold,
-                                          color: const Color.fromRGBO(
-                                              255, 178, 79, 1),
                                         ),
                                       ),
                                     ],

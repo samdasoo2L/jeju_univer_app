@@ -5,7 +5,6 @@ import 'package:html/dom.dart' as dom;
 
 import '../resources/time_resources.dart';
 import 'food_list_widge.dart';
-import 'food_resource.dart';
 
 Future<dynamic> collegeFoodMenu(BuildContext context) async {
   await showDialog<void>(
@@ -29,9 +28,9 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
   List<List> collegeFoodMenu = [];
   List<String> daytime = [];
   List<String> daylist = ["로딩중", "로딩중", "로딩중", "로딩중", "로딩중"];
-  List<int> lunchMenuNumber = FoodList().lunchMenuNumber;
-  List<int> dinnerMenuNumber = FoodList().dinnerMenuNumber;
-  List<bool> todayMenuBool = FoodList().todayMenubool;
+  List<int> lunchMenuNumber = [0, 0, 0, 0, 0];
+  List<int> dinnerMenuNumber = [0, 0, 0, 0, 0];
+  List<bool> todayMenuBool = [false, false, false, false, false];
   List<String> todayNumSource = NowTime().timeCutting();
 
   @override

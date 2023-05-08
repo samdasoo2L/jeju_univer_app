@@ -245,7 +245,6 @@ class _WeatherScreenState extends State<WeatherPage> {
                         .replaceAll("-", "/")
                         .replaceAll(":00:00", "시"),
                     style: TextStyle(
-                      color: const Color.fromRGBO(255, 178, 79, 1),
                       fontSize: 16.sp,
                     ),
                   ),
@@ -255,15 +254,11 @@ class _WeatherScreenState extends State<WeatherPage> {
                       Text(
                         listTemp5[i],
                         style: TextStyle(
-                          color: const Color.fromRGBO(255, 178, 79, 1),
                           fontSize: 20.sp,
                         ),
                       ),
                       const Text(
                         '\u00B0',
-                        style: TextStyle(
-                          color: Color.fromRGBO(255, 178, 79, 1),
-                        ),
                       )
                     ],
                   ),
@@ -308,7 +303,6 @@ class _WeatherScreenState extends State<WeatherPage> {
                     style: GoogleFonts.lato(
                       fontSize: 19.0.sp,
                       fontWeight: FontWeight.bold,
-                      color: const Color.fromRGBO(255, 178, 79, 1),
                     ),
                   ),
                   SizedBox(
@@ -321,7 +315,6 @@ class _WeatherScreenState extends State<WeatherPage> {
                         style: GoogleFonts.lato(
                           fontSize: 40.0.sp,
                           fontWeight: FontWeight.bold,
-                          color: const Color.fromRGBO(255, 178, 79, 1),
                         ),
                       ), //온도text
                       Text(
@@ -329,7 +322,6 @@ class _WeatherScreenState extends State<WeatherPage> {
                         style: GoogleFonts.lato(
                           fontSize: 40.0.sp,
                           fontWeight: FontWeight.bold,
-                          color: const Color.fromRGBO(255, 178, 79, 1),
                         ),
                       ),
                     ],
@@ -344,7 +336,6 @@ class _WeatherScreenState extends State<WeatherPage> {
                         style: GoogleFonts.lato(
                           fontSize: 20.0.sp,
                           fontWeight: FontWeight.bold,
-                          color: const Color.fromRGBO(255, 178, 79, 1),
                         ),
                       ),
                     ],
@@ -359,7 +350,6 @@ class _WeatherScreenState extends State<WeatherPage> {
                         style: GoogleFonts.lato(
                           fontSize: 20.0.sp,
                           fontWeight: FontWeight.bold,
-                          color: const Color.fromRGBO(255, 178, 79, 1),
                         ),
                       ),
                       SizedBox(
@@ -370,7 +360,6 @@ class _WeatherScreenState extends State<WeatherPage> {
                         style: GoogleFonts.lato(
                           fontSize: 35.0.sp,
                           fontWeight: FontWeight.bold,
-                          color: const Color.fromRGBO(255, 178, 79, 1),
                         ),
                       ),
                     ],

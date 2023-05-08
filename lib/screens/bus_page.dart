@@ -143,6 +143,7 @@ class _BusPageState extends State<BusPage> {
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(
+                        width: 2.5,
                         color: const Color.fromARGB(255, 255, 165, 47),
                       ),
                       borderRadius: BorderRadius.circular(15),
@@ -156,7 +157,7 @@ class _BusPageState extends State<BusPage> {
                         "${nowTimeInfo[0]}:${nowTimeInfo[1]}:${nowTimeInfo[2]}",
                         style: const TextStyle(
                           fontSize: 30,
-                          color: Color.fromARGB(255, 255, 174, 68),
+                          color: Colors.black,
                         ),
                       ),
                     ),
@@ -173,37 +174,39 @@ class _BusPageState extends State<BusPage> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
+                                width: 2.5,
                                 color: const Color.fromARGB(255, 255, 165, 47),
                               ),
                             ),
                             width: 160.w,
-                            height: 63.h,
+                            height: 70.h,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
-                              child: Column(
-                                children: [
-                                  const Text(
-                                    "A코스",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w800,
-                                      color: Color.fromARGB(255, 255, 174, 68),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    child: Text(
-                                      aState,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: Column(
+                                  children: [
+                                    const Text(
+                                      "A코스",
                                       style: TextStyle(
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 255, 174, 68),
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black,
                                       ),
                                     ),
-                                  )
-                                ],
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      child: Text(
+                                        aState,
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -217,6 +220,7 @@ class _BusPageState extends State<BusPage> {
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(10)),
                                   border: Border.all(
+                                    width: 2.5,
                                     color:
                                         const Color.fromRGBO(255, 178, 79, 1),
                                   ),
@@ -236,7 +240,7 @@ class _BusPageState extends State<BusPage> {
                                     "A코스 시간표",
                                     style: TextStyle(
                                       fontSize: 20,
-                                      color: Color.fromRGBO(255, 178, 79, 1),
+                                      color: Colors.black,
                                     ),
                                   ),
                                 ),
@@ -248,6 +252,7 @@ class _BusPageState extends State<BusPage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
+                                  width: 2.5,
                                   color:
                                       const Color.fromARGB(255, 255, 174, 68),
                                 ),
@@ -272,43 +277,50 @@ class _BusPageState extends State<BusPage> {
                               ))
                         ],
                       ),
+                      Container(
+                        width: 1.5,
+                        height: 340.h,
+                        decoration: const BoxDecoration(
+                            color: Color.fromARGB(255, 255, 165, 47)),
+                      ),
                       Column(
                         children: [
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
+                                width: 2.5,
                                 color: const Color.fromARGB(255, 255, 165, 47),
                               ),
                             ),
                             width: 160.w,
-                            height: 63.h,
+                            height: 70.h,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
-                              child: Column(
-                                children: [
-                                  const Text(
-                                    "B코스",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w800,
-                                      color: Color.fromARGB(255, 255, 174, 68),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 5),
-                                    child: Text(
-                                      bState,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: Column(
+                                  children: [
+                                    const Text(
+                                      "B코스",
                                       style: TextStyle(
-                                        fontSize: 15.sp,
-                                        fontWeight: FontWeight.w600,
-                                        color: const Color.fromARGB(
-                                            255, 255, 174, 68),
+                                        fontSize: 20,
+                                        color: Colors.black,
                                       ),
                                     ),
-                                  )
-                                ],
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
+                                      child: Text(
+                                        bState,
+                                        style: TextStyle(
+                                          fontSize: 15.sp,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
                           ),
@@ -322,6 +334,7 @@ class _BusPageState extends State<BusPage> {
                                   borderRadius: const BorderRadius.all(
                                       Radius.circular(10)),
                                   border: Border.all(
+                                    width: 2.5,
                                     color:
                                         const Color.fromRGBO(255, 178, 79, 1),
                                   ),
@@ -341,7 +354,7 @@ class _BusPageState extends State<BusPage> {
                                     "B코스 시간표",
                                     style: TextStyle(
                                       fontSize: 20,
-                                      color: Color.fromRGBO(255, 178, 79, 1),
+                                      color: Colors.black,
                                     ),
                                   ),
                                 ),
@@ -353,6 +366,7 @@ class _BusPageState extends State<BusPage> {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
+                                  width: 2.5,
                                   color:
                                       const Color.fromARGB(255, 255, 174, 68),
                                 ),

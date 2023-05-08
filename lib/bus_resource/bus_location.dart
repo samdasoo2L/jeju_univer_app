@@ -31,7 +31,6 @@ class BusNowLocationShow extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.w900,
-                color: Color.fromARGB(255, 255, 145, 0),
               ),
             ),
             const SizedBox(
@@ -41,8 +40,7 @@ class BusNowLocationShow extends StatelessWidget {
               busStopName,
               style: const TextStyle(
                 fontSize: 14,
-                fontWeight: FontWeight.w600,
-                color: Color.fromARGB(255, 255, 174, 68),
+                // fontWeight: FontWeight.w600,
               ),
             ),
           ],
