@@ -4,9 +4,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'bus_info.dart';
 
 class BusDialog extends StatelessWidget {
-  BusDialog({super.key});
-  List<int> aTimeLine = BusTimeLine().aTimeLine;
-  List<String> aBusStopLocation = BusStopLocation().aBusStopLocation;
+  final List<int> timeLine;
+  final List<String> busStopLocation;
+  final String busType;
+  const BusDialog(
+      {super.key,
+      required this.timeLine,
+      required this.busStopLocation,
+      required this.busType});
 
   @override
   Widget build(BuildContext context) {
@@ -39,43 +44,113 @@ class BusDialog extends StatelessWidget {
                 ]),
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
-              child: Column(
-                children: [
-                  Container(
-                    child: Row(
-                      children: [
-                        for (var i = 0; i <= 10; i++)
-                          Container(
+              child: SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                child: Padding(
+                  padding: const EdgeInsets.all(15),
+                  child: Column(
+                    children: [
+                      Container(
+                        child: Row(
+                          children: [
+                            Container(
+                              child: Row(
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    width: 80,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5),
+                                    ),
+                                    child: Text(
+                                      busType,
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  )
+                                ],
+                              ),
+                            ),
+                            for (var i = 0; i <= 11; i++)
+                              Container(
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: 80,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        color: Colors.orange,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: Text(
+                                        busStopLocation[i],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      width: 10,
+                                    )
+                                  ],
+                                ),
+                              )
+                          ],
+                        ),
+                      ),
+                      for (var i = 0; i <= 23; i++)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8),
+                          child: Container(
                             child: Row(
                               children: [
-                                Text(
-                                  aBusStopLocation[i],
+                                Container(
+                                  alignment: Alignment.center,
+                                  width: 80,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                    color: Colors.orange,
+                                    borderRadius: BorderRadius.circular(5),
+                                  ),
+                                  child: Text("${i + 1}회차"),
                                 ),
                                 const SizedBox(
                                   width: 10,
-                                )
+                                ),
+                                for (var j = 0; j <= 11; j++)
+                                  Container(
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.center,
+                                          width: 80,
+                                          height: 30,
+                                          decoration: BoxDecoration(
+                                            color: Colors.orange.shade100,
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                          ),
+                                          child: Text(
+                                            "${((timeLine[i] + j) ~/ 60).toString().padLeft(2, '0')}:${((timeLine[i] + j) % 60).toString().padLeft(2, '0')}",
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        )
+                                      ],
+                                    ),
+                                  )
                               ],
                             ),
-                          )
-                      ],
-                    ),
-                  ),
-                  for (var i = 0; i <= 23; i++)
-                    Container(
-                        child: Row(
-                      children: [
-                        Text(
-                          "${i + 1}회차",
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text(
-                          aTimeLine[i].toString(),
+                          ),
                         )
-                      ],
-                    ))
-                ],
+                    ],
+                  ),
+                ),
               ),
             ),
           ),

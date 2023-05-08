@@ -220,7 +220,11 @@ class _BusPageState extends State<BusPage> {
                                     showDialog(
                                         context: context,
                                         builder: (BuildContext context) =>
-                                            BusDialog());
+                                            BusDialog(
+                                              busStopLocation: aBusStopLocation,
+                                              timeLine: aBusTimeLine,
+                                              busType: 'A코스',
+                                            ));
                                   },
                                   child: const Text(
                                     "A코스 시간표",
@@ -243,7 +247,7 @@ class _BusPageState extends State<BusPage> {
                                 ),
                               ),
                               width: 160.w,
-                              height: 180.h,
+                              height: 240.h,
                               child: SingleChildScrollView(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -277,7 +281,7 @@ class _BusPageState extends State<BusPage> {
                               child: Column(
                                 children: [
                                   const Text(
-                                    "A코스",
+                                    "B코스",
                                     style: TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.w800,
@@ -285,7 +289,7 @@ class _BusPageState extends State<BusPage> {
                                     ),
                                   ),
                                   Text(
-                                    aState,
+                                    bState,
                                     style: const TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600,
@@ -297,6 +301,42 @@ class _BusPageState extends State<BusPage> {
                             ),
                           ),
                           const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 160.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(10)),
+                                  border: Border.all(
+                                    color:
+                                        const Color.fromRGBO(255, 178, 79, 1),
+                                  ),
+                                ),
+                                child: TextButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            BusDialog(
+                                              busStopLocation: bBusStopLocation,
+                                              timeLine: bBusTimeLine,
+                                              busType: 'B코스',
+                                            ));
+                                  },
+                                  child: const Text(
+                                    "B코스 시간표",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Color.fromRGBO(255, 178, 79, 1),
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                          const SizedBox(height: 8),
                           Container(
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
@@ -306,7 +346,7 @@ class _BusPageState extends State<BusPage> {
                                 ),
                               ),
                               width: 160.w,
-                              height: 180.h,
+                              height: 240.h,
                               child: SingleChildScrollView(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -316,9 +356,9 @@ class _BusPageState extends State<BusPage> {
                                     children: [
                                       for (var i = 0; i <= 11; i++)
                                         BusNowLocationShow(
-                                            busStopName: aBusStopLocation[i],
-                                            stopBool: aNowLocationBool[
-                                                aBusStopLocation[i]] ??= false),
+                                            busStopName: bBusStopLocation[i],
+                                            stopBool: bNowLocationBool[
+                                                bBusStopLocation[i]] ??= false),
                                     ],
                                   ),
                                 ),
