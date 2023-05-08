@@ -258,7 +258,7 @@ class _BusPageState extends State<BusPage> {
                                 ),
                               ),
                               width: 160.w,
-                              height: 220.h,
+                              height: 160.h,
                               child: SingleChildScrollView(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -279,7 +279,7 @@ class _BusPageState extends State<BusPage> {
                       ),
                       Container(
                         width: 1.5,
-                        height: 340.h,
+                        height: 280.h,
                         decoration: const BoxDecoration(
                             color: Color.fromARGB(255, 255, 165, 47)),
                       ),
@@ -372,7 +372,7 @@ class _BusPageState extends State<BusPage> {
                                 ),
                               ),
                               width: 160.w,
-                              height: 220.h,
+                              height: 160.h,
                               child: SingleChildScrollView(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
