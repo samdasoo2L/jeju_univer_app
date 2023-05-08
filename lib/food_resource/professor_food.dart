@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CustomDialog extends StatelessWidget {
   const CustomDialog({super.key});
@@ -19,8 +20,8 @@ class CustomDialog extends StatelessWidget {
       child: Stack(
         children: [
           Container(
-            width: 400.w,
-            height: 500.h,
+            width: 250.w,
+            height: 200.h,
             margin: const EdgeInsets.only(top: 0, right: 0),
             decoration: BoxDecoration(
                 color: Colors.white,
@@ -34,17 +35,35 @@ class CustomDialog extends StatelessWidget {
                   ),
                 ]),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
-              children: const [
-                Text("고기국수"),
-                Text("고기국밥"),
-                Text("순두부찌개"),
+              children: [
+                Text(
+                  "고기국수",
+                  style: GoogleFonts.lato(
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "고기국밥",
+                  style: GoogleFonts.lato(
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  "순두부찌개",
+                  style: GoogleFonts.lato(
+                    fontSize: 30.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ),
           Positioned(
-            right: 0.0,
+            right: 9.0,
             child: GestureDetector(
               onTap: () {
                 Navigator.of(context).pop();

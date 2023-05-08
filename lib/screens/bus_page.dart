@@ -177,6 +177,7 @@ class _BusPageState extends State<BusPage> {
                               ),
                             ),
                             width: 160.w,
+                            height: 63.h,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Column(
@@ -189,12 +190,17 @@ class _BusPageState extends State<BusPage> {
                                       color: Color.fromARGB(255, 255, 174, 68),
                                     ),
                                   ),
-                                  Text(
-                                    aState,
-                                    style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color.fromARGB(255, 255, 174, 68),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5),
+                                    child: Text(
+                                      aState,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(
+                                            255, 255, 174, 68),
+                                      ),
                                     ),
                                   )
                                 ],
@@ -247,7 +253,7 @@ class _BusPageState extends State<BusPage> {
                                 ),
                               ),
                               width: 160.w,
-                              height: 240.h,
+                              height: 220.h,
                               child: SingleChildScrollView(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
@@ -276,6 +282,7 @@ class _BusPageState extends State<BusPage> {
                               ),
                             ),
                             width: 160.w,
+                            height: 63.h,
                             child: Padding(
                               padding: const EdgeInsets.symmetric(vertical: 5),
                               child: Column(
@@ -288,12 +295,17 @@ class _BusPageState extends State<BusPage> {
                                       color: Color.fromARGB(255, 255, 174, 68),
                                     ),
                                   ),
-                                  Text(
-                                    bState,
-                                    style: const TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      color: Color.fromARGB(255, 255, 174, 68),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 5),
+                                    child: Text(
+                                      bState,
+                                      style: TextStyle(
+                                        fontSize: 15.sp,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromARGB(
+                                            255, 255, 174, 68),
+                                      ),
                                     ),
                                   )
                                 ],
@@ -346,7 +358,7 @@ class _BusPageState extends State<BusPage> {
                                 ),
                               ),
                               width: 160.w,
-                              height: 240.h,
+                              height: 220.h,
                               child: SingleChildScrollView(
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(

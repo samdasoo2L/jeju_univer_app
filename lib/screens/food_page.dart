@@ -53,7 +53,7 @@ class FoodPage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 85.h,
+                    height: 110.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -86,7 +86,7 @@ class FoodPage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 15.h,
+                    height: 20.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -120,7 +120,7 @@ class FoodPage extends StatelessWidget {
                     ],
                   ),
                   SizedBox(
-                    height: 15.h,
+                    height: 20.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -137,7 +137,8 @@ class FoodPage extends StatelessWidget {
                         ),
                         child: TextButton(
                           onPressed: () {
-                            _launchURL('https://ibfoodjeju.modoo.at/');
+                            _launchURL(
+                                'https://ibfoodjeju.modoo.at/?link=70y98aj7');
                           },
                           child: const Text(
                             "기숙사 식당",
