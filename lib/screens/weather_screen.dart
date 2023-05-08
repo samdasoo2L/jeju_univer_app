@@ -44,13 +44,13 @@ class _WeatherScreenState extends State<WeatherPage> {
     var fiveweatherData = await network.getJsonData();
 
     for (int i = 0; i <= 9; i++) {
-      temp5 = fiveweatherData['list'][i]['main']['temp']
+      temp5 = fiveweatherData['list'][i + 3]['main']['temp']
           .toDouble()
           .toInt()
           .toString();
       weatherIcon5 =
-          fiveweatherData['list'][i]['weather'][0]['icon'].toString();
-      dtTxt5 = fiveweatherData['list'][i]['dt_txt'];
+          fiveweatherData['list'][i + 3]['weather'][0]['icon'].toString();
+      dtTxt5 = fiveweatherData['list'][i + 3]['dt_txt'];
       listTemp5[i] = temp5!;
       listweatherIcon5[i] = weatherIcon5!;
       listdtTxt5[i] = dtTxt5!;
@@ -149,6 +149,7 @@ class _WeatherScreenState extends State<WeatherPage> {
         color: const Color.fromRGBO(255, 178, 79, 0.8),
       ),
       child: ListView.builder(
+        padding: const EdgeInsets.all(1),
         itemCount: 5,
         itemBuilder: (context, int i) {
           return Padding(
