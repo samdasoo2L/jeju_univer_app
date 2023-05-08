@@ -165,233 +165,249 @@ class _BusPageState extends State<BusPage> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Column(
+                  SizedBox(
+                    height: 330.h,
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                width: 2.5,
-                                color: const Color.fromARGB(255, 255, 165, 47),
-                              ),
-                            ),
-                            width: 160.w,
-                            height: 70.h,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 5),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: Column(
-                                  children: [
-                                    const Text(
-                                      "A코스",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w500,
-                                        color: Colors.black,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5),
-                                      child: Text(
-                                        aState,
-                                        style: TextStyle(
-                                          fontSize: 15.sp,
-                                          color: Colors.black,
-                                        ),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          Column(
                             children: [
                               Container(
-                                width: 160.w,
                                 decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(10)),
+                                  borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
                                     width: 2.5,
                                     color:
-                                        const Color.fromRGBO(255, 178, 79, 1),
+                                        const Color.fromARGB(255, 255, 165, 47),
                                   ),
                                 ),
-                                child: TextButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) =>
-                                            BusDialog(
-                                              busStopLocation: aBusStopLocation,
-                                              timeLine: aBusTimeLine,
-                                              busType: 'A코스',
-                                            ));
-                                  },
-                                  child: const Text(
-                                    "A코스 시간표",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.black,
+                                width: 160.w,
+                                height: 70.h,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.vertical,
+                                    child: Column(
+                                      children: [
+                                        const Text(
+                                          "A코스",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 5),
+                                          child: Text(
+                                            aState,
+                                            style: TextStyle(
+                                              fontSize: 15.sp,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  width: 2.5,
-                                  color:
-                                      const Color.fromARGB(255, 255, 174, 68),
-                                ),
                               ),
-                              width: 160.w,
-                              height: 160.h,
-                              child: SingleChildScrollView(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 10,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      for (var i = 0; i <= 11; i++)
-                                        BusNowLocationShow(
-                                            busStopName: aBusStopLocation[i],
-                                            stopBool: aNowLocationBool[
-                                                aBusStopLocation[i]] ??= false),
-                                    ],
-                                  ),
-                                ),
-                              ))
-                        ],
-                      ),
-                      Container(
-                        width: 1.5,
-                        height: 280.h,
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 255, 165, 47)),
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              border: Border.all(
-                                width: 2.5,
-                                color: const Color.fromARGB(255, 255, 165, 47),
-                              ),
-                            ),
-                            width: 160.w,
-                            height: 70.h,
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 5),
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: Column(
-                                  children: [
-                                    const Text(
-                                      "B코스",
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        color: Colors.black,
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 160.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                      border: Border.all(
+                                        width: 2.5,
+                                        color: const Color.fromRGBO(
+                                            255, 178, 79, 1),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5),
-                                      child: Text(
-                                        bState,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                BusDialog(
+                                                  busStopLocation:
+                                                      aBusStopLocation,
+                                                  timeLine: aBusTimeLine,
+                                                  busType: 'A코스',
+                                                ));
+                                      },
+                                      child: const Text(
+                                        "A코스 시간표",
                                         style: TextStyle(
-                                          fontSize: 15.sp,
+                                          fontSize: 20,
                                           color: Colors.black,
                                         ),
                                       ),
-                                    )
-                                  ],
-                                ),
+                                    ),
+                                  )
+                                ],
                               ),
-                            ),
+                              const SizedBox(height: 8),
+                              Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      width: 2.5,
+                                      color: const Color.fromARGB(
+                                          255, 255, 174, 68),
+                                    ),
+                                  ),
+                                  width: 160.w,
+                                  height: 160.h,
+                                  child: SingleChildScrollView(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 10,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          for (var i = 0; i <= 11; i++)
+                                            BusNowLocationShow(
+                                                busStopName:
+                                                    aBusStopLocation[i],
+                                                stopBool: aNowLocationBool[
+                                                        aBusStopLocation[i]] ??=
+                                                    false),
+                                        ],
+                                      ),
+                                    ),
+                                  ))
+                            ],
                           ),
-                          const SizedBox(height: 8),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                          Container(
+                            width: 1.5,
+                            height: 280.h,
+                            decoration: const BoxDecoration(
+                                color: Color.fromARGB(255, 255, 165, 47)),
+                          ),
+                          Column(
                             children: [
                               Container(
-                                width: 160.w,
                                 decoration: BoxDecoration(
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(10)),
+                                  borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
                                     width: 2.5,
                                     color:
-                                        const Color.fromRGBO(255, 178, 79, 1),
+                                        const Color.fromARGB(255, 255, 165, 47),
                                   ),
                                 ),
-                                child: TextButton(
-                                  onPressed: () {
-                                    showDialog(
-                                        context: context,
-                                        builder: (BuildContext context) =>
-                                            BusDialog(
-                                              busStopLocation: bBusStopLocation,
-                                              timeLine: bBusTimeLine,
-                                              busType: 'B코스',
-                                            ));
-                                  },
-                                  child: const Text(
-                                    "B코스 시간표",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: Colors.black,
+                                width: 160.w,
+                                height: 70.h,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 5),
+                                  child: SingleChildScrollView(
+                                    scrollDirection: Axis.vertical,
+                                    child: Column(
+                                      children: [
+                                        const Text(
+                                          "B코스",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: Colors.black,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 5),
+                                          child: Text(
+                                            bState,
+                                            style: TextStyle(
+                                              fontSize: 15.sp,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
                                   ),
                                 ),
-                              )
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 160.w,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(10)),
+                                      border: Border.all(
+                                        width: 2.5,
+                                        color: const Color.fromRGBO(
+                                            255, 178, 79, 1),
+                                      ),
+                                    ),
+                                    child: TextButton(
+                                      onPressed: () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (BuildContext context) =>
+                                                BusDialog(
+                                                  busStopLocation:
+                                                      bBusStopLocation,
+                                                  timeLine: bBusTimeLine,
+                                                  busType: 'B코스',
+                                                ));
+                                      },
+                                      child: const Text(
+                                        "B코스 시간표",
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          color: Colors.black,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              const SizedBox(height: 8),
+                              Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                      width: 2.5,
+                                      color: const Color.fromARGB(
+                                          255, 255, 174, 68),
+                                    ),
+                                  ),
+                                  width: 160.w,
+                                  height: 160.h,
+                                  child: SingleChildScrollView(
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        vertical: 10,
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          for (var i = 0; i <= 11; i++)
+                                            BusNowLocationShow(
+                                                busStopName:
+                                                    bBusStopLocation[i],
+                                                stopBool: bNowLocationBool[
+                                                        bBusStopLocation[i]] ??=
+                                                    false),
+                                        ],
+                                      ),
+                                    ),
+                                  ))
                             ],
                           ),
-                          const SizedBox(height: 8),
-                          Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                  width: 2.5,
-                                  color:
-                                      const Color.fromARGB(255, 255, 174, 68),
-                                ),
-                              ),
-                              width: 160.w,
-                              height: 160.h,
-                              child: SingleChildScrollView(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                    vertical: 10,
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      for (var i = 0; i <= 11; i++)
-                                        BusNowLocationShow(
-                                            busStopName: bBusStopLocation[i],
-                                            stopBool: bNowLocationBool[
-                                                bBusStopLocation[i]] ??= false),
-                                    ],
-                                  ),
-                                ),
-                              ))
                         ],
                       ),
-                    ],
+                    ),
                   )
                 ],
               ),
