@@ -51,7 +51,7 @@ class BusNotificationDialog extends StatelessWidget {
                   child: Text(
                     "순환 버스 위치는 제주대 버스시간표 정보를 바탕으로 돌아갑니다.\n\n"
                     "그 날 상황에 따라 시간오차가 생겨 버스가 조금씩 늦어 질 수 있습니다.\n\n"
-                    "이 점 유의해주시기 바랍니다.",
+                    "이 점 유의해주시기 바랍니다. 😊",
                     style: TextStyle(fontSize: 17.sp),
                   ),
                 ),

@@ -446,16 +446,20 @@ class _MainPageState extends State<MainPage> {
                                   ),
                                 ),
                                 child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
+                                    SizedBox(
+                                      height: 10.h,
+                                    ),
                                     Text(
                                       "현재 날씨",
                                       style: TextStyle(
-                                        fontSize: 30.sp,
+                                        fontSize: 18.sp,
                                         fontWeight: FontWeight.w600,
                                       ),
+                                    ),
+                                    SizedBox(
+                                      height: 10.h,
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -467,14 +471,14 @@ class _MainPageState extends State<MainPage> {
                                               : preWeatherData[0],
                                           style: TextStyle(
                                             fontSize: 60.sp,
-                                            fontWeight: FontWeight.w300,
+                                            fontWeight: FontWeight.w200,
                                           ),
                                         ), //온도text
                                         Text(
                                           '\u00B0',
                                           style: TextStyle(
                                             fontSize: 60.sp,
-                                            fontWeight: FontWeight.w300,
+                                            fontWeight: FontWeight.w200,
                                           ),
                                         ),
                                       ],
@@ -489,27 +493,33 @@ class _MainPageState extends State<MainPage> {
                                               : preWeatherData[1],
                                           style: TextStyle(
                                             fontSize: 25.sp,
-                                            fontWeight: FontWeight.w600,
+                                            fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                       ],
+                                    ),
+                                    SizedBox(
+                                      height: 20.h,
                                     ),
                                     Column(
                                       children: [
                                         Text(
                                           '대기질 지수',
                                           style: TextStyle(
-                                            fontSize: 15.sp,
-                                            fontWeight: FontWeight.w400,
+                                            fontSize: 18.sp,
+                                            fontWeight: FontWeight.w600,
                                           ),
+                                        ),
+                                        SizedBox(
+                                          height: 10.h,
                                         ),
                                         Text(
                                           preWeatherData.isEmpty
                                               ? "로딩"
                                               : preWeatherData[2],
                                           style: TextStyle(
-                                            fontSize: 30.sp,
-                                            fontWeight: FontWeight.w600,
+                                            fontSize: 25.sp,
+                                            fontWeight: FontWeight.w400,
                                           ),
                                         ),
                                       ],

@@ -304,7 +304,8 @@ class _BusPageState extends State<BusPage> {
                             width: 1.5,
                             height: 295.h,
                             decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 255, 165, 47)),
+                              color: Color.fromARGB(255, 255, 165, 47),
+                            ),
                           ),
                           Column(
                             children: [
