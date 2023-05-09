@@ -36,28 +36,26 @@ class CustomDialog extends StatelessWidget {
                 ),
               ],
             ),
-            child: Expanded(
-              child: PageView(
-                controller: controller,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        'assets/professorfoods/gogiguksu.png',
-                        fit: BoxFit.cover,
-                      ),
+            child: PageView(
+              controller: controller,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      'assets/professorfoods/gogiguksu.png',
+                      fit: BoxFit.cover,
                     ),
                   ),
-                  Container(
-                    child: const Text("국밥 이미지 준비중"),
-                  ),
-                  Container(
-                    child: const Text("순두부찌개 이미지 준비중"),
-                  )
-                ],
-              ),
+                ),
+                Container(
+                  child: const Text("국밥 이미지 준비중"),
+                ),
+                Container(
+                  child: const Text("순두부찌개 이미지 준비중"),
+                ),
+              ],
             ),
           ),
           Positioned(
