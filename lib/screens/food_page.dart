@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../food_resource/college_food.dart';
@@ -39,28 +40,28 @@ class FoodPage extends StatelessWidget {
                     height: 50.h,
                   ),
                   Row(
-                    children: const [
+                    children: [
                       SizedBox(
-                        width: 35,
+                        width: 30.w,
                       ),
                       Text(
                         "식당",
-                        style: TextStyle(
-                          fontSize: 50,
-                          color: Colors.white,
-                        ),
+                        style: GoogleFonts.lato(
+                            fontSize: 40.0.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       )
                     ],
                   ),
                   SizedBox(
-                    height: 110.h,
+                    height: 90.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        height: 100,
-                        width: 300,
+                        height: 90.h,
+                        width: 245.w,
                         decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(19)),
@@ -75,10 +76,10 @@ class FoodPage extends StatelessWidget {
                             collegeFoodMenu(context);
                             //collegeFoodMenu(context);
                           },
-                          child: const Text(
+                          child: Text(
                             "백두관 식당",
                             style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 30.sp,
                               color: Colors.black,
                             ),
                           ),
@@ -93,8 +94,8 @@ class FoodPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        height: 100,
-                        width: 300,
+                        height: 90.h,
+                        width: 245.w,
                         decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(19)),
@@ -110,10 +111,10 @@ class FoodPage extends StatelessWidget {
                                 builder: (BuildContext context) =>
                                     const CustomDialog());
                           },
-                          child: const Text(
+                          child: Text(
                             "교수회관",
                             style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 30.sp,
                               color: Colors.black,
                             ),
                           ),
@@ -128,8 +129,8 @@ class FoodPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        height: 100,
-                        width: 300,
+                        height: 90.h,
+                        width: 245.w,
                         decoration: BoxDecoration(
                           borderRadius:
                               const BorderRadius.all(Radius.circular(19)),
@@ -143,10 +144,10 @@ class FoodPage extends StatelessWidget {
                             _launchURL(
                                 'https://ibfoodjeju.modoo.at/?link=70y98aj7');
                           },
-                          child: const Text(
+                          child: Text(
                             "기숙사 식당",
                             style: TextStyle(
-                              fontSize: 30,
+                              fontSize: 30.sp,
                               color: Colors.black,
                             ),
                           ),

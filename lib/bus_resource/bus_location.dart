@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BusNowLocationShow extends StatelessWidget {
   String busStopName = "";
@@ -16,30 +17,30 @@ class BusNowLocationShow extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 3),
         child: Row(
           children: [
-            const SizedBox(
-              width: 25,
+            SizedBox(
+              width: 25.w,
             ),
             Text(
               stopBool ? "⚫" : "⚪",
-              style: const TextStyle(fontSize: 16),
+              style: TextStyle(fontSize: 16.sp),
             ),
-            const SizedBox(
-              width: 20,
+            SizedBox(
+              width: 20.w,
             ),
-            const Text(
+            Text(
               "|",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: 16.sp,
                 fontWeight: FontWeight.w900,
               ),
             ),
-            const SizedBox(
-              width: 8,
+            SizedBox(
+              width: 8.w,
             ),
             Text(
               busStopName,
-              style: const TextStyle(
-                fontSize: 14,
+              style: TextStyle(
+                fontSize: 14.sp,
                 // fontWeight: FontWeight.w600,
               ),
             ),

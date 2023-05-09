@@ -88,7 +88,7 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
         result = result;
         collegeFoodMenu = collegeFoodMenu;
         todayMenuBool = todayMenuBool;
-        print(todayInfo);
+        //print(todayInfo);
       },
     );
   }

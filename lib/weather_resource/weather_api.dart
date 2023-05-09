@@ -24,11 +24,11 @@ class WeatherData {
 
     String? weatherKorean() {
       if (des == 'clear sky') {
-        return "맑은 하늘";
+        return "맑음";
       } else if (des == 'few clouds') {
-        return "흩어진 구름";
+        return "약간 구름";
       } else if (des == 'broken cloud') {
-        return "부서진 구름";
+        return "구름";
       } else if (des == 'shower rain') {
         return "소나기";
       } else if (des == 'rain') {

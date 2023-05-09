@@ -20,5 +20,4 @@ class MyApp extends StatelessWidget {
       designSize: const Size(360, 640),
     );
   }
-  // commit확인
 }

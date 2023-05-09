@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'bus_info.dart';
-
 class BusDialog extends StatelessWidget {
   final List<int> timeLine;
   final List<String> busStopLocation;

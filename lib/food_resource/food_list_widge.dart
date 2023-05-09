@@ -55,8 +55,11 @@ class CollegeFoodMenuList extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: Column(
-                        children: const [
-                          Text('점심'),
+                        children: [
+                          Text(
+                            '점심',
+                            style: TextStyle(fontSize: 15.sp),
+                          ),
                         ],
                       ),
                     ),
@@ -70,6 +73,7 @@ class CollegeFoodMenuList extends StatelessWidget {
                             for (var name1 in collegeFoodMenu[lunchMenuNumber])
                               Text(
                                 name1.replaceAll('amp;', ''),
+                                style: TextStyle(fontSize: 15.sp),
                               ),
                         ],
                       ),
@@ -84,8 +88,11 @@ class CollegeFoodMenuList extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: Column(
-                        children: const [
-                          Text('저녁'),
+                        children: [
+                          Text(
+                            '저녁',
+                            style: TextStyle(fontSize: 15.sp),
+                          ),
                         ],
                       ),
                     ),
@@ -97,7 +104,10 @@ class CollegeFoodMenuList extends StatelessWidget {
                             const Text("로딩중")
                           else
                             for (var name1 in collegeFoodMenu[dinnerMenuNumber])
-                              Text(name1),
+                              Text(
+                                name1,
+                                style: TextStyle(fontSize: 15.sp),
+                              ),
                         ],
                       ),
                     ),

@@ -113,7 +113,10 @@ class _WeatherScreenState extends State<WeatherPage> {
             ],
           ),
           SizedBox(
-            height: 465.h,
+            height: 80.h,
+          ),
+          SizedBox(
+            height: 370.h,
             width: 400.w,
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -171,30 +174,40 @@ class _WeatherScreenState extends State<WeatherPage> {
                   else
                     Text(
                       weekListdtTxt5[i].substring(0, 10),
+                      style: GoogleFonts.lato(
+                        fontSize: 17.0.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: Column(
-                      children: [
-                        if (weekListweatherIcon5[0] == "")
-                          const Text("이미지 로딩중")
-                        else
-                          Image.network(
-                              'https://openweathermap.org/img/wn/${weekListweatherIcon5[i]}@2x.png')
-                      ],
-                    ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      if (weekListweatherIcon5[0] == "")
+                        const Text("이미지 로딩중")
+                      else
+                        SizedBox(
+                          width: 50.w,
+                          height: 40.h,
+                          child: Image.network(
+                              'https://openweathermap.org/img/wn/${weekListweatherIcon5[i]}@2x.png',
+                              fit: BoxFit.scaleDown),
+                        )
+                    ],
                   ),
                   Row(
                     children: [
                       Text(
                         weekListTemp5[i],
-                        style: const TextStyle(color: Colors.black),
+                        style: GoogleFonts.lato(
+                          fontSize: 20.0.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                      const Text(
+                      Text(
                         '\u00B0',
-                        style: TextStyle(
-                          color: Colors.black,
+                        style: GoogleFonts.lato(
+                          fontSize: 20.0.sp,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -244,8 +257,9 @@ class _WeatherScreenState extends State<WeatherPage> {
                         .replaceAll('2023-', '')
                         .replaceAll("-", "/")
                         .replaceAll(":00:00", "시"),
-                    style: TextStyle(
-                      fontSize: 16.sp,
+                    style: GoogleFonts.lato(
+                      fontSize: 16.0.sp,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Row(
@@ -253,27 +267,33 @@ class _WeatherScreenState extends State<WeatherPage> {
                     children: [
                       Text(
                         listTemp5[i],
-                        style: TextStyle(
-                          fontSize: 20.sp,
+                        style: GoogleFonts.lato(
+                          fontSize: 20.0.sp,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const Text(
+                      Text(
                         '\u00B0',
+                        style: GoogleFonts.lato(
+                          fontSize: 20.0.sp,
+                          fontWeight: FontWeight.bold,
+                        ),
                       )
                     ],
                   ),
-                  SizedBox(
-                    width: 50,
-                    height: 50,
-                    child: Column(
-                      children: [
-                        if (listweatherIcon5[0] == "")
-                          const Text("이미지 로딩중")
-                        else
-                          Image.network(
-                              'https://openweathermap.org/img/wn/${listweatherIcon5[i]}@2x.png')
-                      ],
-                    ),
+                  Column(
+                    children: [
+                      if (listweatherIcon5[0] == "")
+                        const Text("이미지 로딩중")
+                      else
+                        SizedBox(
+                          width: 35.w,
+                          height: 30.h,
+                          child: Image.network(
+                              'https://openweathermap.org/img/wn/${listweatherIcon5[i]}@2x.png',
+                              fit: BoxFit.scaleDown),
+                        )
+                    ],
                   )
                 ],
               ),
@@ -288,9 +308,6 @@ class _WeatherScreenState extends State<WeatherPage> {
     return Container(
       child: Column(
         children: [
-          SizedBox(
-            height: 80.h,
-          ),
           Row(
             children: [
               SizedBox(

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class CustomDialog extends StatelessWidget {
-  const CustomDialog({super.key});
+class BusNotificationDialog extends StatelessWidget {
+  const BusNotificationDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +15,9 @@ class CustomDialog extends StatelessWidget {
   }
 
   Widget professorMenu(BuildContext context) {
-    final controller = PageController();
     return SizedBox(
       width: 250.w,
-      height: 200.h,
+      height: 250.h,
       child: Stack(
         children: [
           Container(
@@ -36,43 +34,28 @@ class CustomDialog extends StatelessWidget {
                 ),
               ],
             ),
-            child: Expanded(
-              child: PageView(
-                controller: controller,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.asset(
-                        'assets/professorfoods/gogiguksu.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 10.h,
+                ),
+                Text(
+                  "안내사항",
+                  style: TextStyle(fontSize: 30.sp),
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20.h),
+                  child: Text(
+                    "순환 버스 위치는 제주대 버스시간표 정보를 바탕으로 돌아갑니다.\n\n"
+                    "그 날 상황에 따라 시간오차가 생겨 버스가 조금씩 늦어 질 수 있습니다.\n\n"
+                    "이 점 유의해주시기 바랍니다.",
+                    style: TextStyle(fontSize: 17.sp),
                   ),
-                  Container(
-                    child: const Text("국밥 이미지 준비중"),
-                  ),
-                  Container(
-                    child: const Text("순두부찌개 이미지 준비중"),
-                  )
-                ],
-              ),
-            ),
-          ),
-          Positioned(
-            bottom: 10.h,
-            left: 113.w,
-            child: SmoothPageIndicator(
-              controller: controller,
-              count: 3,
-              axisDirection: Axis.horizontal,
-              effect: const SlideEffect(
-                activeDotColor: Color.fromRGBO(255, 178, 79, 1),
-                dotHeight: 15,
-                dotColor: Colors.white,
-                dotWidth: 15,
-              ),
+                ),
+              ],
             ),
           ),
           Positioned(
