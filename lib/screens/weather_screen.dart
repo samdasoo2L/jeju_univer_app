@@ -137,9 +137,6 @@ class _WeatherScreenState extends State<WeatherPage> {
               ),
             ),
           ),
-          SizedBox(
-            height: 1.h,
-          ),
         ],
       ),
     );
