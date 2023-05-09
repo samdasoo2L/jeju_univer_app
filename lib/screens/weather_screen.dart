@@ -94,6 +94,7 @@ class _WeatherScreenState extends State<WeatherPage> {
   Container WeatherContaninerColumn() {
     return Container(
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
             height: 50.h,
@@ -115,6 +116,7 @@ class _WeatherScreenState extends State<WeatherPage> {
           SizedBox(
             height: 80.h,
           ),
+          const SizedBox(),
           SizedBox(
             height: 370.h,
             width: 400.w,
@@ -134,7 +136,10 @@ class _WeatherScreenState extends State<WeatherPage> {
                 ],
               ),
             ),
-          )
+          ),
+          SizedBox(
+            height: 1.h,
+          ),
         ],
       ),
     );

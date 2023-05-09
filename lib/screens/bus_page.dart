@@ -120,6 +120,7 @@ class _BusPageState extends State<BusPage> {
             ),
             Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
                     height: 50.h,
@@ -154,6 +155,7 @@ class _BusPageState extends State<BusPage> {
                   SizedBox(
                     height: 70.h,
                   ),
+                  const SizedBox(),
                   Container(
                     decoration: BoxDecoration(
                       border: Border.all(

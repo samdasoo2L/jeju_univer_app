@@ -197,6 +197,7 @@ class _MainPageState extends State<MainPage> {
               width: double.infinity,
             ),
             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -227,6 +228,7 @@ class _MainPageState extends State<MainPage> {
                 SizedBox(
                   height: 30.h,
                 ),
+                const SizedBox(),
                 SizedBox(
                   height: 390.h,
                   child: SingleChildScrollView(
@@ -533,6 +535,9 @@ class _MainPageState extends State<MainPage> {
                       ],
                     ),
                   ),
+                ),
+                SizedBox(
+                  height: 2.h,
                 ),
               ],
             ),
