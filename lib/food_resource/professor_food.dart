@@ -49,11 +49,25 @@ class CustomDialog extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  child: const Text("국밥 이미지 준비중"),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      'assets/professorfoods/gukbab.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                Container(
-                  child: const Text("순두부찌개 이미지 준비중"),
+                Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(16),
+                    child: Image.asset(
+                      'assets/professorfoods/sundubu.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
               ],
             ),
