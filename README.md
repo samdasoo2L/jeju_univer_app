@@ -1,16 +1,19 @@
-# jeju_univer_app
+# 귤생이들
 
-A new Flutter project.
+제주대학교 학생들을 위한 Flutter를 이용한 어플리케이션
 
-## Getting Started
+## 기능
 
-This project is a starting point for a Flutter application.
+1. 제주대학교의 교내버스의 현위치를 제공된 시간표를 통해 보여줌 
+2. 제주대학교 구내식당의 식단 정보를 제주대학교 홈페이지에서 가져와 보여줌 
+3. 제주대학교 현재 날씨에 대한 정보를 API를 통해 보여줌 
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 다운로드
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+앱스토어에서 "귤생이들"을 검색하여 다운로드
+
+
+## 버전
+
+1.0 : 2023/05/10 완료
