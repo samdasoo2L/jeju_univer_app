@@ -33,6 +33,8 @@ class WeatherData {
         return "소나기";
       } else if (des == 'rain') {
         return "비";
+      } else if (des == 'light rain') {
+        return "비";
       } else if (des == 'heavy intensity rain') {
         return "강우";
       } else if (des == 'moderate rain') {
