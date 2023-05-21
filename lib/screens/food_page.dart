@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../food_resource/college_food.dart';
+import '../food_resource/food_time_table.dart';
 import '../food_resource/professor_food.dart';
 
 class FoodPage extends StatelessWidget {
@@ -39,18 +40,54 @@ class FoodPage extends StatelessWidget {
                   SizedBox(
                     height: 50.h,
                   ),
-                  Row(
+                  Column(
                     children: [
-                      SizedBox(
-                        width: 30.w,
+                      Row(
+                        children: [
+                          SizedBox(
+                            width: 30.w,
+                          ),
+                          Text(
+                            "식당",
+                            style: GoogleFonts.lato(
+                                fontSize: 40.0.sp,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white),
+                          ),
+                          SizedBox(
+                            width: 5.w,
+                          ),
+                          GestureDetector(
+                            onTap: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      const FoodTimeTable());
+                            },
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: const BorderRadius.all(
+                                  Radius.circular(10),
+                                ),
+                                border: Border.all(
+                                  width: 2,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  "운영시간",
+                                  style: GoogleFonts.lato(
+                                      fontSize: 15.0.sp,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      Text(
-                        "식당",
-                        style: GoogleFonts.lato(
-                            fontSize: 40.0.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      )
                     ],
                   ),
                   SizedBox(
@@ -74,7 +111,6 @@ class FoodPage extends StatelessWidget {
                           style: const ButtonStyle(),
                           onPressed: () {
                             collegeFoodMenu(context);
-                            //collegeFoodMenu(context);
                           },
                           child: Text(
                             "백두관 식당",
@@ -154,6 +190,9 @@ class FoodPage extends StatelessWidget {
                         ),
                       )
                     ],
+                  ),
+                  SizedBox(
+                    height: 20.h,
                   ),
                 ],
               ),

@@ -45,6 +45,12 @@ class _MainPageState extends State<MainPage> {
     getFoodData();
   }
 
+  // void updateUI() {
+  //   setState(() {
+  //     print("이게 맞는 걸까");
+  //   });
+  // }
+
   bool isAllFalse(List<bool> list) {
     for (var element in list) {
       if (element != false) {
@@ -214,21 +220,33 @@ class _MainPageState extends State<MainPage> {
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
-                        Text(
-                          "제주대 관련 정보",
-                          style: GoogleFonts.lato(
-                              fontSize: 20.0.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                        Row(
+                          children: [
+                            Text(
+                              "제주대 관련 정보",
+                              style: GoogleFonts.lato(
+                                  fontSize: 20.0.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                            // IconButton(
+                            //   onPressed: () {
+                            //     return updateUI();
+                            //   },
+                            //   icon: const Icon(
+                            //     Icons.restore,
+                            //     color: Colors.white,
+                            //   ),
+                            // ),
+                          ],
                         ),
                       ],
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 30.h,
+                  height: 12.h,
                 ),
-                const SizedBox(),
                 SizedBox(
                   height: 390.h,
                   child: SingleChildScrollView(
