@@ -42,51 +42,70 @@ class FoodPage extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Row(
-                        children: [
-                          SizedBox(
-                            width: 30.w,
-                          ),
-                          Text(
-                            "식당",
-                            style: GoogleFonts.lato(
-                                fontSize: 40.0.sp,
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white),
-                          ),
-                          SizedBox(
-                            width: 5.w,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      const FoodTimeTable());
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: const BorderRadius.all(
-                                  Radius.circular(10),
-                                ),
-                                border: Border.all(
-                                  width: 2,
-                                  color: Colors.white,
-                                ),
-                              ),
+                      SizedBox(
+                        height: 70,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              width: 30.w,
+                            ),
+                            Align(
+                              alignment: Alignment.bottomCenter,
                               child: Padding(
-                                padding: const EdgeInsets.all(4.0),
+                                padding: const EdgeInsets.all(0),
                                 child: Text(
-                                  "운영시간",
+                                  "식당",
                                   style: GoogleFonts.lato(
-                                      fontSize: 15.0.sp,
+                                      fontSize: 40.0.sp,
                                       fontWeight: FontWeight.bold,
                                       color: Colors.white),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              width: 6.w,
+                            ),
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 8),
+                                child: Container(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (BuildContext context) =>
+                                              const FoodTimeTable());
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: const BorderRadius.all(
+                                          Radius.circular(10),
+                                        ),
+                                        border: Border.all(
+                                          width: 2,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Text(
+                                          "운영시간",
+                                          style: GoogleFonts.lato(
+                                              fontSize: 15.0.sp,
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

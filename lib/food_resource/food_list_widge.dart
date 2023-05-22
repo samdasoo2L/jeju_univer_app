@@ -40,7 +40,7 @@ class CollegeFoodMenuList extends StatelessWidget {
                   daylist.isEmpty ? "로딩중입니다" : daylist[daysNumber],
                   style: TextStyle(
                     color: todayMenuBool ? Colors.amber[800] : Colors.black,
-                    fontSize: 15.sp,
+                    fontSize: todayMenuBool ? 20.sp : 15.sp,
                   ),
                 ),
               ],

@@ -100,7 +100,7 @@ class BusDialog extends StatelessWidget {
                           ],
                         ),
                       ),
-                      for (var i = 0; i <= 23; i++)
+                      for (var i = 0; i <= 22; i++)
                         Padding(
                           padding: const EdgeInsets.only(top: 8),
                           child: Container(

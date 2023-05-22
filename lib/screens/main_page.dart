@@ -213,12 +213,34 @@ class _MainPageState extends State<MainPage> {
                         SizedBox(
                           height: 50.h,
                         ),
-                        Text(
-                          "귤 생 이 들",
-                          style: GoogleFonts.lato(
-                              fontSize: 40.0.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
+                        Row(
+                          children: [
+                            Container(
+                              clipBehavior: Clip.hardEdge,
+                              height: 55,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: Image.asset('assets/images/app_icon.png',
+                                  fit: BoxFit.contain),
+                            ),
+                            Text(
+                              " 귤 생 이 들 ",
+                              style: GoogleFonts.lato(
+                                  fontSize: 40.0.sp,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            ),
+                            Container(
+                              clipBehavior: Clip.hardEdge,
+                              height: 55,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              child: Image.asset('assets/images/app_icon.png',
+                                  fit: BoxFit.contain),
+                            ),
+                          ],
                         ),
                         Row(
                           children: [
@@ -314,11 +336,21 @@ class _MainPageState extends State<MainPage> {
                                       SizedBox(
                                         height: 5.h,
                                       ),
-                                      Text(
-                                        "A코스",
-                                        style: TextStyle(
-                                            fontSize: 18.sp,
-                                            fontWeight: FontWeight.w600),
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                          border: Border(
+                                            bottom: BorderSide(
+                                                color: Color.fromRGBO(
+                                                    255, 117, 79, 1),
+                                                width: 1.1),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          "A코스",
+                                          style: TextStyle(
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                       ),
                                       SizedBox(
                                         height: 2.h,
@@ -356,11 +388,21 @@ class _MainPageState extends State<MainPage> {
                                       SizedBox(
                                         height: 5.h,
                                       ),
-                                      Text(
-                                        "B코스",
-                                        style: TextStyle(
-                                            fontSize: 18.sp,
-                                            fontWeight: FontWeight.w600),
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                          border: Border(
+                                            bottom: BorderSide(
+                                                color: Color.fromRGBO(
+                                                    79, 146, 255, 1),
+                                                width: 1.1),
+                                          ),
+                                        ),
+                                        child: Text(
+                                          "B코스",
+                                          style: TextStyle(
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.w600),
+                                        ),
                                       ),
                                       SizedBox(
                                         height: 2.h,
@@ -425,12 +467,38 @@ class _MainPageState extends State<MainPage> {
                                                     SizedBox(
                                                       height: 10.h,
                                                     ),
+                                                    Container(
+                                                      decoration:
+                                                          const BoxDecoration(
+                                                        border: Border(
+                                                          bottom: BorderSide(
+                                                              color: Color
+                                                                  .fromRGBO(
+                                                                      255,
+                                                                      178,
+                                                                      79,
+                                                                      1),
+                                                              width: 1.2),
+                                                        ),
+                                                      ),
+                                                      child: Text(
+                                                        "${daylist[i]} 백두관 점심",
+                                                        style: TextStyle(
+                                                          fontSize: 18.sp,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 3.h,
+                                                    ),
                                                     Text(
-                                                      "${daylist[i]} 백두관 점심",
+                                                      "11:00 ~ 14:00",
                                                       style: TextStyle(
-                                                        fontSize: 18.sp,
+                                                        fontSize: 15.sp,
                                                         fontWeight:
-                                                            FontWeight.w600,
+                                                            FontWeight.w500,
                                                       ),
                                                     ),
                                                     SizedBox(
@@ -471,11 +539,21 @@ class _MainPageState extends State<MainPage> {
                                     SizedBox(
                                       height: 10.h,
                                     ),
-                                    Text(
-                                      "현재 날씨",
-                                      style: TextStyle(
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.w600,
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                        border: Border(
+                                          bottom: BorderSide(
+                                              color: Color.fromRGBO(
+                                                  255, 178, 79, 1),
+                                              width: 1.2),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        "현재 날씨",
+                                        style: TextStyle(
+                                          fontSize: 18.sp,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
@@ -490,14 +568,14 @@ class _MainPageState extends State<MainPage> {
                                               ? "로딩"
                                               : preWeatherData[0],
                                           style: TextStyle(
-                                            fontSize: 60.sp,
+                                            fontSize: 50.sp,
                                             fontWeight: FontWeight.w200,
                                           ),
                                         ), //온도text
                                         Text(
                                           '\u00B0',
                                           style: TextStyle(
-                                            fontSize: 60.sp,
+                                            fontSize: 50.sp,
                                             fontWeight: FontWeight.w200,
                                           ),
                                         ),
@@ -512,7 +590,7 @@ class _MainPageState extends State<MainPage> {
                                               ? "로딩"
                                               : preWeatherData[1],
                                           style: TextStyle(
-                                            fontSize: 25.sp,
+                                            fontSize: 20.sp,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),
@@ -523,11 +601,21 @@ class _MainPageState extends State<MainPage> {
                                     ),
                                     Column(
                                       children: [
-                                        Text(
-                                          '대기질 지수',
-                                          style: TextStyle(
-                                            fontSize: 18.sp,
-                                            fontWeight: FontWeight.w600,
+                                        Container(
+                                          decoration: const BoxDecoration(
+                                            border: Border(
+                                              bottom: BorderSide(
+                                                  color: Color.fromRGBO(
+                                                      255, 178, 79, 1),
+                                                  width: 1.2),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            '대기질 지수',
+                                            style: TextStyle(
+                                              fontSize: 18.sp,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
                                         ),
                                         SizedBox(
@@ -538,7 +626,7 @@ class _MainPageState extends State<MainPage> {
                                               ? "로딩"
                                               : preWeatherData[2],
                                           style: TextStyle(
-                                            fontSize: 25.sp,
+                                            fontSize: 20.sp,
                                             fontWeight: FontWeight.w400,
                                           ),
                                         ),

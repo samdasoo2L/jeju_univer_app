@@ -125,32 +125,38 @@ class _BusPageState extends State<BusPage> {
                   SizedBox(
                     height: 50.h,
                   ),
-                  Row(
-                    children: [
-                      SizedBox(
-                        width: 30.w,
-                      ),
-                      Text(
-                        '버스',
-                        style: GoogleFonts.lato(
-                            fontSize: 40.0.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          showDialog(
-                              context: context,
-                              builder: (BuildContext context) =>
-                                  const BusNotificationDialog());
-                        },
-                        icon: Icon(
-                          FontAwesomeIcons.circleQuestion,
-                          color: Colors.white,
-                          size: 20.h,
+                  SizedBox(
+                    height: 70,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 30.w,
                         ),
-                      )
-                    ],
+                        Text(
+                          '버스',
+                          style: GoogleFonts.lato(
+                              fontSize: 40.0.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: IconButton(
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      const BusNotificationDialog());
+                            },
+                            icon: Icon(
+                              FontAwesomeIcons.circleQuestion,
+                              color: Colors.white,
+                              size: 20.h,
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 70.h,
@@ -208,12 +214,22 @@ class _BusPageState extends State<BusPage> {
                                     scrollDirection: Axis.vertical,
                                     child: Column(
                                       children: [
-                                        Text(
-                                          "A코스",
-                                          style: TextStyle(
-                                            fontSize: 20.sp,
-                                            fontWeight: FontWeight.w500,
-                                            color: Colors.black,
+                                        Container(
+                                          decoration: const BoxDecoration(
+                                            border: Border(
+                                              bottom: BorderSide(
+                                                  color: Color.fromRGBO(
+                                                      255, 117, 79, 1),
+                                                  width: 1.5),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            "A코스",
+                                            style: TextStyle(
+                                              fontSize: 20.sp,
+                                              fontWeight: FontWeight.w500,
+                                              color: Colors.black,
+                                            ),
                                           ),
                                         ),
                                         Padding(
@@ -329,11 +345,21 @@ class _BusPageState extends State<BusPage> {
                                     scrollDirection: Axis.vertical,
                                     child: Column(
                                       children: [
-                                        Text(
-                                          "B코스",
-                                          style: TextStyle(
-                                            fontSize: 20.sp,
-                                            color: Colors.black,
+                                        Container(
+                                          decoration: const BoxDecoration(
+                                            border: Border(
+                                              bottom: BorderSide(
+                                                  color: Color.fromRGBO(
+                                                      79, 146, 255, 1),
+                                                  width: 1.5),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            "B코스",
+                                            style: TextStyle(
+                                              fontSize: 20.sp,
+                                              color: Colors.black,
+                                            ),
                                           ),
                                         ),
                                         Padding(
