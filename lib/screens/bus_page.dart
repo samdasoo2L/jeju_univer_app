@@ -123,40 +123,37 @@ class _BusPageState extends State<BusPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    height: 50.h,
+                    height: 40.h,
                   ),
-                  SizedBox(
-                    height: 70,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 30.w,
-                        ),
-                        Text(
-                          '버스',
-                          style: GoogleFonts.lato(
-                              fontSize: 40.0.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white),
-                        ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: IconButton(
-                            onPressed: () {
-                              showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      const BusNotificationDialog());
-                            },
-                            icon: Icon(
-                              FontAwesomeIcons.circleQuestion,
-                              color: Colors.white,
-                              size: 20.h,
-                            ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 30.w,
+                      ),
+                      Text(
+                        '버스',
+                        style: GoogleFonts.lato(
+                            fontSize: 40.0.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: IconButton(
+                          onPressed: () {
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) =>
+                                    const BusNotificationDialog());
+                          },
+                          icon: Icon(
+                            FontAwesomeIcons.circleQuestion,
+                            color: Colors.white,
+                            size: 20.h,
                           ),
-                        )
-                      ],
-                    ),
+                        ),
+                      )
+                    ],
                   ),
                   SizedBox(
                     height: 70.h,

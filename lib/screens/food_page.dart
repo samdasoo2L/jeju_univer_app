@@ -36,76 +36,73 @@ class FoodPage extends StatelessWidget {
             ),
             Container(
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   SizedBox(
-                    height: 50.h,
+                    height: 40.h,
                   ),
                   Column(
                     children: [
-                      SizedBox(
-                        height: 70,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SizedBox(
-                              width: 30.w,
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Padding(
-                                padding: const EdgeInsets.all(0),
-                                child: Text(
-                                  "식당",
-                                  style: GoogleFonts.lato(
-                                      fontSize: 40.0.sp,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.white),
-                                ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 30.w,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.all(0),
+                              child: Text(
+                                "식당",
+                                style: GoogleFonts.lato(
+                                    fontSize: 40.0.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
                               ),
                             ),
-                            SizedBox(
-                              width: 6.w,
-                            ),
-                            Align(
-                              alignment: Alignment.bottomCenter,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 8),
-                                child: Container(
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) =>
-                                              const FoodTimeTable());
-                                    },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: const BorderRadius.all(
-                                          Radius.circular(10),
-                                        ),
-                                        border: Border.all(
-                                          width: 2,
-                                          color: Colors.white,
-                                        ),
+                          ),
+                          SizedBox(
+                            width: 6.w,
+                          ),
+                          Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Container(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) =>
+                                            const FoodTimeTable());
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(10),
                                       ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(4.0),
-                                        child: Text(
-                                          "운영시간",
-                                          style: GoogleFonts.lato(
-                                              fontSize: 15.0.sp,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white),
-                                        ),
+                                      border: Border.all(
+                                        width: 2,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        "운영시간",
+                                        style: GoogleFonts.lato(
+                                            fontSize: 15.0.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -142,9 +139,6 @@ class FoodPage extends StatelessWidget {
                       )
                     ],
                   ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -176,9 +170,6 @@ class FoodPage extends StatelessWidget {
                         ),
                       )
                     ],
-                  ),
-                  SizedBox(
-                    height: 20.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

@@ -97,7 +97,7 @@ class _WeatherScreenState extends State<WeatherPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            height: 50.h,
+            height: 40.h,
           ),
           Row(
             children: [
@@ -116,7 +116,6 @@ class _WeatherScreenState extends State<WeatherPage> {
           SizedBox(
             height: 80.h,
           ),
-          const SizedBox(),
           SizedBox(
             height: 370.h,
             width: 400.w,

@@ -217,7 +217,7 @@ class _MainPageState extends State<MainPage> {
                           children: [
                             Container(
                               clipBehavior: Clip.hardEdge,
-                              height: 55,
+                              height: 55.h,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
                               ),
@@ -233,7 +233,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                             Container(
                               clipBehavior: Clip.hardEdge,
-                              height: 55,
+                              height: 55.h,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
                               ),
