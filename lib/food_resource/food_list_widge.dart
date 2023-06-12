@@ -33,6 +33,7 @@ class CollegeFoodMenuList extends StatelessWidget {
               children: [
                 Text(
                   todayinfo.isEmpty ? "로딩중입니다" : todayinfo.substring(5),
+                  style: TextStyle(fontSize: 15.sp),
                 ),
               ],
             ),
@@ -63,8 +64,8 @@ class CollegeFoodMenuList extends StatelessWidget {
                           else
                             for (var lunchL in todaylunchinfo)
                               Text(
-                                // name1.replaceAll('amp;', ''),
-                                lunchL, style: TextStyle(fontSize: 15.sp),
+                                lunchL,
+                                style: TextStyle(fontSize: 14.sp),
                               ),
                         ],
                       ),
@@ -97,7 +98,7 @@ class CollegeFoodMenuList extends StatelessWidget {
                             for (var dinnerL in todaydinnerinfo)
                               Text(
                                 dinnerL,
-                                style: TextStyle(fontSize: 15.sp),
+                                style: TextStyle(fontSize: 14.sp),
                               ),
                         ],
                       ),

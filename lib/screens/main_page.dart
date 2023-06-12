@@ -479,7 +479,7 @@ class _MainPageState extends State<MainPage> {
                                                     Text(
                                                       name1,
                                                       style: TextStyle(
-                                                        fontSize: 15.sp,
+                                                        fontSize: 17.sp,
                                                         fontWeight:
                                                             FontWeight.w400,
                                                       ),
