@@ -2,21 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CollegeFoodMenuList extends StatelessWidget {
-  const CollegeFoodMenuList(
-      {super.key,
-      required this.daylist,
-      required this.collegeFoodMenu,
-      required this.daysNumber,
-      required this.lunchMenuNumber,
-      required this.dinnerMenuNumber,
-      required this.todayMenuBool});
+  const CollegeFoodMenuList({
+    super.key,
+    required this.todayinfo,
+    required this.todaylunchinfo,
+    required this.todaydinnerinfo,
+  });
 
-  final List<String> daylist;
-  final List<List> collegeFoodMenu;
-  final int daysNumber;
-  final int lunchMenuNumber;
-  final int dinnerMenuNumber;
-  final bool todayMenuBool;
+  final String todayinfo;
+  final List todaylunchinfo;
+  final List todaydinnerinfo;
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +32,11 @@ class CollegeFoodMenuList extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  daylist.isEmpty ? "로딩중입니다" : daylist[daysNumber],
-                  style: TextStyle(
-                    color: todayMenuBool ? Colors.amber[800] : Colors.black,
-                    fontSize: todayMenuBool ? 20.sp : 15.sp,
-                  ),
+                  todayinfo.isEmpty ? "로딩중입니다" : todayinfo,
+                  // style: TextStyle(
+                  //   // color: todayMenuBool ? Colors.amber[800] : Colors.black,
+                  //   // fontSize: todayMenuBool ? 20.sp : 15.sp,
+                  // ),
                 ),
               ],
             ),
@@ -67,13 +62,13 @@ class CollegeFoodMenuList extends StatelessWidget {
                       flex: 4,
                       child: Column(
                         children: [
-                          if (collegeFoodMenu.isEmpty)
+                          if (todaylunchinfo.isEmpty)
                             const Text("로딩중")
                           else
-                            for (var name1 in collegeFoodMenu[lunchMenuNumber])
+                            for (var lunchL in todaylunchinfo)
                               Text(
-                                name1.replaceAll('amp;', ''),
-                                style: TextStyle(fontSize: 15.sp),
+                                // name1.replaceAll('amp;', ''),
+                                lunchL, style: TextStyle(fontSize: 15.sp),
                               ),
                         ],
                       ),
@@ -100,12 +95,12 @@ class CollegeFoodMenuList extends StatelessWidget {
                       flex: 4,
                       child: Column(
                         children: [
-                          if (collegeFoodMenu.isEmpty)
+                          if (todaydinnerinfo.isEmpty)
                             const Text("로딩중")
                           else
-                            for (var name1 in collegeFoodMenu[dinnerMenuNumber])
+                            for (var dinnerL in todaydinnerinfo)
                               Text(
-                                name1,
+                                dinnerL,
                                 style: TextStyle(fontSize: 15.sp),
                               ),
                         ],

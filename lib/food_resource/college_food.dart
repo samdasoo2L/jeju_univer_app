@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
 import 'package:html/dom.dart' as dom;
 
-import '../resources/time_resources.dart';
 import 'food_list_widge.dart';
 
 Future<dynamic> collegeFoodMenu(BuildContext context) async {
@@ -25,13 +24,9 @@ class MyStatefulDialog extends StatefulWidget {
 class _MyStatefulDialogState extends State<MyStatefulDialog> {
   List<String> titles = [];
   List<String> result = [];
-  List<List> collegeFoodMenu = [];
-  List<String> daytime = [];
-  List<String> daylist = ["로딩중", "로딩중", "로딩중", "로딩중", "로딩중"];
-  List<int> lunchMenuNumber = [0, 0, 0, 0, 0];
-  List<int> dinnerMenuNumber = [0, 0, 0, 0, 0];
-  List<bool> todayMenuBool = [false, false, false, false, false];
-  List<String> todayNumSource = NowTime().timeCutting();
+  List<List> dinnerbiglist = [[], [], [], [], []];
+  List<List> lunchbiglist = [[], [], [], [], []];
+  List<String> daybiglist = ["", "", "", "", ""];
 
   @override
   void initState() {
@@ -40,57 +35,38 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
   }
 
   Future getWebsiteData() async {
-    final url = Uri.parse('https://www.jejunu.ac.kr/camp/stud/foodmenu');
+    final url = Uri.parse('https://www.jejunu.ac.kr/camp/stud/foodmenu.htm');
     final response = await http.get(url);
     dom.Document html = dom.Document.html(response.body);
 
     var titles = html
-        .querySelectorAll('td.border_right.border_bottom.txt_center > p')
+        .querySelectorAll('body > script')
         .map((element) => element.innerHtml.trim())
         .toList();
 
-    List<String> result = titles.toList();
+    var dinnerlist = titles[8].split("dinner\":\"");
 
-    for (int i = 0; i < result.length; i++) {
-      collegeFoodMenu.add(result[i].split("<br>"));
+    for (int i = 0; i < 5; i++) {
+      String beforedinnerbiglist = (dinnerlist[i + 1].split("\",\""))[0];
+      dinnerbiglist[i] = beforedinnerbiglist.split("\\r\\n");
     }
 
-    int daysNum = 0;
-    for (int i = 0; i < collegeFoodMenu.length; i++) {
-      if (collegeFoodMenu[i][0] != "없음") {
-        lunchMenuNumber[daysNum] = i;
-        dinnerMenuNumber[daysNum] = i + 1;
-        i += 1;
-        daysNum += 1;
-      }
+    var lunchlist = titles[8].split("lunch\":\"");
+
+    for (int i = 0; i < 5; i++) {
+      String beforelunchbiglist = (lunchlist[i + 1].split("\",\""))[0];
+      lunchbiglist[i] = beforelunchbiglist.split("\\r\\n");
     }
 
-    var daytime = html
-        .querySelectorAll('table > tbody > tr > td:nth-child(1)')
-        .map((element) => element.innerHtml.trim())
-        .toList();
+    var daylist = titles[8].split("date\":\"");
 
-    List<int> foodDayList = [0, 4, 8, 12, 16];
-    for (int i = 0; i <= 4; i++) {
-      daylist[i] = (daytime[foodDayList[i]].split("<br>")[0]);
+    for (int i = 0; i < 5; i++) {
+      daybiglist[i] = (daylist[i + 1].split("\",\""))[0];
     }
 
-    String todayInfo = "${todayNumSource[3]}/${todayNumSource[4]}";
-    // String todayInfo = "05/01";
-
-    for (int i = 0; i <= 4; i++) {
-      if (daylist[i] == todayInfo) todayMenuBool[i] = true;
-    }
-
-    setState(
-      () {
-        this.titles = titles;
-        result = result;
-        collegeFoodMenu = collegeFoodMenu;
-        todayMenuBool = todayMenuBool;
-        //print(todayInfo);
-      },
-    );
+    setState(() {
+      result = result;
+    });
   }
 
   @override
@@ -133,12 +109,10 @@ class _MyStatefulDialogState extends State<MyStatefulDialog> {
                   ),
                   for (var i = 0; i <= 4; i++)
                     CollegeFoodMenuList(
-                        daylist: daylist,
-                        collegeFoodMenu: collegeFoodMenu,
-                        daysNumber: i,
-                        lunchMenuNumber: lunchMenuNumber[i],
-                        dinnerMenuNumber: dinnerMenuNumber[i],
-                        todayMenuBool: todayMenuBool[i]),
+                      todayinfo: daybiglist[i],
+                      todaylunchinfo: lunchbiglist[i],
+                      todaydinnerinfo: dinnerbiglist[i],
+                    ),
                 ],
               ),
             ),

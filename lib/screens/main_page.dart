@@ -28,13 +28,12 @@ class _MainPageState extends State<MainPage> {
   final List<String> aBusStopLocation = BusStopLocation().aBusStopLocation;
   final List<String> bBusStopLocation = BusStopLocation().bBusStopLocation;
   List<dynamic> preWeatherData = [];
+
   List<String> titles = [];
   List<String> result = [];
-  List<List> collegeFoodMenu = [];
-  List<String> daytime = [];
-  List<String> daylist = ["로딩중", "로딩중", "로딩중", "로딩중", "로딩중"];
-  List<int> lunchMenuNumber = [0, 0, 0, 0, 0];
-  List<int> dinnerMenuNumber = [0, 0, 0, 0, 0];
+  List<List> dinnerbiglist = [[], [], [], [], []];
+  List<List> lunchbiglist = [[], [], [], [], []];
+  List<String> daybiglist = ["", "", "", "", ""];
   List<bool> todayMenuBool = [false, false, false, false, false];
 
   @override
@@ -44,12 +43,6 @@ class _MainPageState extends State<MainPage> {
     getUserOrder();
     getFoodData();
   }
-
-  // void updateUI() {
-  //   setState(() {
-  //     print("이게 맞는 걸까");
-  //   });
-  // }
 
   bool isAllFalse(List<bool> list) {
     for (var element in list) {
@@ -138,56 +131,42 @@ class _MainPageState extends State<MainPage> {
   }
 
   Future getFoodData() async {
-    final url = Uri.parse('https://www.jejunu.ac.kr/camp/stud/foodmenu');
+    final url = Uri.parse('https://www.jejunu.ac.kr/camp/stud/foodmenu.htm');
     final response = await http.get(url);
     dom.Document html = dom.Document.html(response.body);
 
     var titles = html
-        .querySelectorAll('td.border_right.border_bottom.txt_center > p')
+        .querySelectorAll('body > script')
         .map((element) => element.innerHtml.trim())
         .toList();
 
-    List<String> result = titles.toList();
+    var dinnerlist = titles[8].split("dinner\":\"");
 
-    for (int i = 0; i < result.length; i++) {
-      collegeFoodMenu.add(result[i].split("<br>"));
+    for (int i = 0; i < 5; i++) {
+      String beforedinnerbiglist = (dinnerlist[i + 1].split("\",\""))[0];
+      dinnerbiglist[i] = beforedinnerbiglist.split("\\r\\n");
     }
 
-    int daysNum = 0;
-    for (int i = 0; i < collegeFoodMenu.length; i++) {
-      if (collegeFoodMenu[i][0] != "없음") {
-        lunchMenuNumber[daysNum] = i;
-        dinnerMenuNumber[daysNum] = i + 1;
-        i += 1;
-        daysNum += 1;
+    var lunchlist = titles[8].split("lunch\":\"");
+
+    for (int i = 0; i < 5; i++) {
+      String beforelunchbiglist = (lunchlist[i + 1].split("\",\""))[0];
+      lunchbiglist[i] = beforelunchbiglist.split("\\r\\n");
+    }
+
+    var daylist = titles[8].split("date\":\"");
+
+    for (int i = 0; i < 5; i++) {
+      daybiglist[i] = (daylist[i + 1].split("\",\""))[0];
+    }
+    for (int i = 0; i < 5; i++) {
+      var compareDay = (daybiglist[i].split("-"))[2];
+      if (compareDay == nowTimeInfo[4]) {
+        todayMenuBool[i] = true;
       }
     }
 
-    var daytime = html
-        .querySelectorAll('table > tbody > tr > td:nth-child(1)')
-        .map((element) => element.innerHtml.trim())
-        .toList();
-
-    List<int> foodDayList = [0, 4, 8, 12, 16];
-    for (int i = 0; i <= 4; i++) {
-      daylist[i] = (daytime[foodDayList[i]].split("<br>")[0]);
-    }
-
-    String todayInfo = "${nowTimeInfo[3]}/${nowTimeInfo[4]}";
-    // String todayInfo = "05/02";
-
-    for (int i = 0; i <= 4; i++) {
-      if (daylist[i] == todayInfo) todayMenuBool[i] = true;
-    }
-
-    setState(
-      () {
-        this.titles = titles;
-        result = result;
-        collegeFoodMenu = collegeFoodMenu;
-        todayMenuBool = todayMenuBool;
-      },
-    );
+    setState(() {});
   }
 
   @override
@@ -251,15 +230,6 @@ class _MainPageState extends State<MainPage> {
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white),
                             ),
-                            // IconButton(
-                            //   onPressed: () {
-                            //     return updateUI();
-                            //   },
-                            //   icon: const Icon(
-                            //     Icons.restore,
-                            //     color: Colors.white,
-                            //   ),
-                            // ),
                           ],
                         ),
                       ],
@@ -434,94 +404,93 @@ class _MainPageState extends State<MainPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Container(
-                                  height: 240.h,
-                                  width: 165.w,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(15),
-                                    border: Border.all(
-                                      width: 3,
-                                      color:
-                                          const Color.fromRGBO(255, 178, 79, 1),
-                                    ),
+                                height: 240.h,
+                                width: 165.w,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15),
+                                  border: Border.all(
+                                    width: 3,
+                                    color:
+                                        const Color.fromRGBO(255, 178, 79, 1),
                                   ),
-                                  child: Column(
-                                    children: [
-                                      if (isAllFalse(todayMenuBool))
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 20),
-                                          child: Icon(
-                                            Icons
-                                                .sentiment_satisfied_alt_outlined,
-                                            size: 100.w,
-                                          ),
-                                        )
-                                      else
-                                        for (var i = 0; i <= 4; i++)
-                                          if (todayMenuBool[i])
-                                            SizedBox(
-                                              height: 230.h,
-                                              child: SingleChildScrollView(
-                                                child: Column(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 10.h,
-                                                    ),
-                                                    Container(
-                                                      decoration:
-                                                          const BoxDecoration(
-                                                        border: Border(
-                                                          bottom: BorderSide(
-                                                              color: Color
-                                                                  .fromRGBO(
-                                                                      255,
-                                                                      178,
-                                                                      79,
-                                                                      1),
-                                                              width: 1.2),
-                                                        ),
-                                                      ),
-                                                      child: Text(
-                                                        "${daylist[i]} 백두관 점심",
-                                                        style: TextStyle(
-                                                          fontSize: 18.sp,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    if (isAllFalse(todayMenuBool))
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 20),
+                                        child: Icon(
+                                          Icons
+                                              .sentiment_satisfied_alt_outlined,
+                                          size: 100.w,
+                                        ),
+                                      )
+                                    else
+                                      for (var i = 0; i <= 4; i++)
+                                        if (todayMenuBool[i])
+                                          SizedBox(
+                                            height: 230.h,
+                                            child: SingleChildScrollView(
+                                              child: Column(
+                                                children: [
+                                                  SizedBox(
+                                                    height: 10.h,
+                                                  ),
+                                                  Container(
+                                                    decoration:
+                                                        const BoxDecoration(
+                                                      border: Border(
+                                                        bottom: BorderSide(
+                                                            color:
+                                                                Color.fromRGBO(
+                                                                    255,
+                                                                    178,
+                                                                    79,
+                                                                    1),
+                                                            width: 1.2),
                                                       ),
                                                     ),
-                                                    SizedBox(
-                                                      height: 3.h,
+                                                    child: Text(
+                                                      "${daybiglist[i].substring(5)} 백두관 점심",
+                                                      style: TextStyle(
+                                                        fontSize: 18.sp,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
                                                     ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 3.h,
+                                                  ),
+                                                  Text(
+                                                    "11:00 ~ 14:00",
+                                                    style: TextStyle(
+                                                      fontSize: 15.sp,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: 10.h,
+                                                  ),
+                                                  for (var name1
+                                                      in lunchbiglist[i])
                                                     Text(
-                                                      "11:00 ~ 14:00",
+                                                      name1,
                                                       style: TextStyle(
                                                         fontSize: 15.sp,
                                                         fontWeight:
-                                                            FontWeight.w500,
+                                                            FontWeight.w400,
                                                       ),
                                                     ),
-                                                    SizedBox(
-                                                      height: 10.h,
-                                                    ),
-                                                    for (var name1
-                                                        in collegeFoodMenu[
-                                                            lunchMenuNumber[i]])
-                                                      Text(
-                                                        name1.replaceAll(
-                                                            'amp;', ''),
-                                                        style: TextStyle(
-                                                          fontSize: 15.sp,
-                                                          fontWeight:
-                                                              FontWeight.w400,
-                                                        ),
-                                                      ),
-                                                  ],
-                                                ),
+                                                ],
                                               ),
                                             ),
-                                    ],
-                                  )),
+                                          ),
+                                  ],
+                                ),
+                              ),
                               Container(
                                 height: 240.h,
                                 width: 165.w,
