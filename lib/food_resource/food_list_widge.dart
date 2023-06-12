@@ -32,11 +32,7 @@ class CollegeFoodMenuList extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  todayinfo.isEmpty ? "로딩중입니다" : todayinfo,
-                  // style: TextStyle(
-                  //   // color: todayMenuBool ? Colors.amber[800] : Colors.black,
-                  //   // fontSize: todayMenuBool ? 20.sp : 15.sp,
-                  // ),
+                  todayinfo.isEmpty ? "로딩중입니다" : todayinfo.substring(5),
                 ),
               ],
             ),
